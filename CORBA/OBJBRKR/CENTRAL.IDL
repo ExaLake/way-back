@@ -1,0 +1,28 @@
+#ifndef CENTRAL_IDL
+#define CENTRAL_IDL
+// File central.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in the central office of
+// a chain of food stores
+//
+
+// Include interface definition for store and POS objects.
+#include "POS.idl"
+#include "Store.idl"
+
+module CentralOffice {
+
+   interface Depot {
+      void FindItemInfo(
+                       in  AStore::AStoreId StoreId
+                      ,in  POS::Barcode     Item
+                      ,in  long             Quantity
+                      ,out AStore::ItemInfo IInfo)
+         raises (AStore::BarcodeNotFound);
+   };
+};
+
+#endif
+#pragma interface_id( "CentralOffice::Depot", "7049337f74c8.0c.bb.09.00.00.00.00.00")
+#pragma operation_id( "CentralOffice::Depot::FindItemInfo", "7049337f74c9.0c.bb.09.00.00.00.00.00", 1)

@@ -1,0 +1,42 @@
+// COMClient.odl : type library source for COMClient.exe
+
+// This file will be processed by the MIDL compiler to produce the
+// type library (COMClient.tlb).
+
+[ uuid(C1ADB657-A5BF-11D3-8651-00C01501BDC4), version(1.0) ]
+library COMClient
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	//  Primary dispatch interface for CCOMClientDoc
+	
+	[ uuid(C1ADB658-A5BF-11D3-8651-00C01501BDC4) ]
+	dispinterface ICOMClient
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CCOMClientDlgAutoProxy)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CCOMClientDlgAutoProxy)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CCOMClientDoc
+	
+	[ uuid(C1ADB656-A5BF-11D3-8651-00C01501BDC4) ]
+	coclass COMClient
+	{
+		[default] dispinterface ICOMClient;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

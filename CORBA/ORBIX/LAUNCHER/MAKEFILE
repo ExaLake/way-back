@@ -1,0 +1,15 @@
+include ../orbix.mk
+
+default: Launcher
+all:	Launcher
+
+LAUNCHER_OBJS = Launcher.o ../idl/PNSC.o ../idl/POSC.o ../idl/CentralC.o ../idl/StoreC.o
+
+Launcher.o: Launcher.cc
+	$(C++) $(C++FLAGS) -c Launcher.cc
+
+Launcher: $(LAUNCHER_OBJS)
+	$(C++) $(C++FLAGS) -o Launcher $(LAUNCHER_OBJS) $(LDFLAGS) -lITclt 
+
+clean:
+	rm *.o Launcher

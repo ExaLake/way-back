@@ -1,0 +1,17 @@
+SOURCE.C   = store_i.C \
+             Srv_Main.C
+
+APPL = StoreServer
+INCLUDE = -I. -I../IDL -I../POS -I../util -I$(PBHOME)/include
+LIBRARY =  -L../IDL -L$(PBHOME)/lib -lstubs -lunixsvc -lcorba -lpbroker
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = ../util/FindPNS.o
+
+include $(PBHOME)/make/make.cfg
+
+all $(APPL): $(OBJECTS) 
+	$(CC) -g -o $(APPL) $(OBJECTS) $(OTHEROBJS) $(LIBRARY) -lnsl -lsocket
+
+clean:
+	rm -f *.o $(APPL) core .nse_depinfo .make.state
+

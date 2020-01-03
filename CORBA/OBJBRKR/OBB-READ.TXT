@@ -1,0 +1,665 @@
+File: OBBREAD.TXT
+
+This file includes additional information about Digital Equipment
+Corporation's ObjectBroker (R) implementation of the
+Point-Of-Sales example for the book, "CORBA Principles and
+Programming". The ObjectBroker implementation uses the CORBA C
+bindings, so these comments apply only the the C coding sections
+of the book. (Please remember that ObjectBroker also has C++
+bindings. We just didn't include them in the book.)
+
+We give instructions below for the Windows NT (R) or Windows 95
+(R) platforms using the Microsoft Visual C++ (R) Development
+System and Tools, V2.0. We tested the code on a variety of other
+platforms as well, but since we don't know the details of your
+platform (ObjectBroker supports over twenty platforms) we don't
+have space to include instructions for them all. The instructions
+are very similar for any UNIX (R) system except for the compiler.
+
+Contents
+--------
+    A. Prerequisites
+    B. What's on the kit and how to get it
+    C. Producing the runnable example
+    D. How to run the example
+    E. Differences from the printed book
+    F. Other things you might try
+
+
+A. Prerequisites
+----------------
+
+We assume you have a system with ObjectBroker V2.6 or later.  To
+ensure you have the right version of ObjectBroker, from a command
+line issue the command "obbsho" to show the version of the
+ObjectBroker software. (This assumes you are running on Windows
+or Unix(R)). See the ObjectBroker documentation to find the
+appropriate command for the other platforms on which the
+ObjectBroker software runs.) If "obbsho" doesn't produce a
+version number, the ObjectBroker software hasn't been installed.
+Talk to your system manager or local sales office to get it.
+
+Your ObjectBroker software must be running as a server well as
+being installed. Test this by giving the command "obbmsho". If
+the ObjectBroker software is not running, you will get an error
+message stating that the agent is not running. See your system
+manager in this case. If the ObjectBroker software is running,
+you will get either a message stating that no implementations are
+currently registered or a series of messages giving information
+about currently registered implementations (the details are not
+important, the fact that they appear at all is).
+
+
+B. What's on the kit and how to get it
+--------------------------------------
+
+The ObjectBroker directory contains (including this obb-read.txt
+file) twenty-six (26) files, all readable in plain text.
+
+1. Copy the files from the directory DISKETTE.001\OBJBRKR to a
+   directory of your choice.
+
+   Since this is a DOS diskette, all file names are in upper
+   case, so the careful capitalization reflected by the command
+   files, in the "include" statements in the C-language files,
+   and in the write-up below are messed up. On the two Windows
+   platforms and many mainframe operating systems, this makes no
+   difference, since case of file names is ignored. If you're
+   running on a different platform, you may have to change the
+   names of the files to match those below.
+
+   The files you get should be (except for capitalization, and
+   not counting the obb-read.txt file):
+
+      Central.idl    annotated IDL for CentralOffice depot
+      common.h       convenient common definitions
+      db.h           templates for database routines
+      depot_m.c      main program for "CentralSrv" process
+      depot.dat      the "database" for the depot (five lines)
+      gen1.bat       batch file for 1st step of generating code
+      gen2.bat       batch file for 2nd step of generating code
+      im.c           method code for InputMedia
+      linear.c       database routines
+      misc.c         miscellaneous convenience routines
+      misc.h         templates for misc.h
+      om.c           method code for OutputMedia
+      om_m.c         main program for "outsrv" process
+      pnamesvc.c     method code for PseudoNameService
+      pname_m.c      main program for "PNS" process
+      PNS.idl        annotated IDL for PseudoNameService
+      POS.idl        annotated IDL for POS
+      posterm.c      method code for POSTerminal
+      pos_m.c        main program for "posclt" process
+      primer.col     Context Object definition language file
+      store.c        method code for Store
+      Store.idl      annotated IDL for Store
+      store_ac.c     method code for StoreAccess
+      store_m.c      main program for "store" process
+      tax.c          method code for Tax
+
+
+C. Producing the runnable example
+---------------------------------
+
+To go from the sources supplied to executable files, perform the
+following steps.
+
+1. Create a new directory (say "\mine" -- where we say "\mine"
+   below, you should replace it with the path you have chosen in
+   the syntax of the system you are using).
+
+   You will note that the .IDL files are described as
+   "annotated". This means that the first step of the book has
+   already been performed, assigning unique repository ids for
+   the IDLs. If you want to start from the absolute beginning,
+   you can copy fresh IDL files from the distribution media's
+   main directory or use an editor to delete the "#pragma"s from
+   these files. Alternately, you can leave the UUID pragmas in
+   the files and just follow the instructions below.
+
+3. If you are using  MSVC, we suggest you create the
+   subdirectories "\mine\example" and "\mine\example\WinDebug" to
+   hold the MSVC project information and the binaries,
+   respectively, keeping them separate from the sources. On other
+   platforms you may want to create a subdirectory from "mine" or
+   just leave the files in "mine", depending on the type of
+   development system you have.
+
+4. Copy the file "depot.dat" from "\mine" into the binary
+   directory you have chosen. The Centralsrv executable expects
+   to find this "database" file in the same directory as itself.
+
+5. Edit the primer.col in directory "mine" to change the
+   directory of OBB_REPOSITORY to point to file "primer.ir" in
+   directory "mine" instead of "c:\corbaobb\primer.ir". For
+   example, on Windows platforms,this might be
+   "c:\mine\primer.ir".
+
+6. Regenerate all the files using ObjectBroker commands in the
+   following three steps. These are all described using a command
+   line interface. ObjectBroker has a GUI component to make this
+   a little easier for new projects, but the command line allows
+   us to use batch files already supplied to you, so you have to
+   do less typing and are less likely to make a mistake entering
+   the data. (If you are working on a non-Windows platform, you
+   will have to edit these files to turn them into the correct
+   syntax for command/script files for your environment.)
+
+    a. Change the directory to "mine" and generate the first set
+       of files.
+
+       On Windows platforms, execute the file "gen1.bat". (You
+       might want to set "echo on" and pipe the output so that
+       you can see the progress; this would be "gen1 | more".)
+
+       This step first creates a local ObjectBroker user context
+       object (so you don't interfere with other work at the
+       system level), annotates the IDL files with unique ids (if
+       not already done, creates and loads the local repository
+       with the annotated IDL, and generates default .IML and
+       .MML files as specified in the book.
+
+   b. As stated in the book, use an editor to change the file
+      "POS.iml". Specifically, in the POSTerminalImpl and
+      InputMediaImpl sections, change the line that says:
+          activation_type ( program );
+      to
+          activation_type ( static_load );
+      Then, in the same two sections,  delete the line that
+      starts with
+          activation_string (...
+      Exit the editor, saving the changes.
+
+   c. Generate the second set of files; on windows platforms,
+      execute the file "gen2.bat".
+
+      This completes the generation of the source files you need:
+      the client stubs, the server skeletons, and the server
+      methods.
+
+      You should note that the methods were already supplied,
+      even though the "gen2.bat" file "generates" them. As stated
+      in the book, when ObjectBroker is generating method routine
+      and it detects that a routine of that name exists already,
+      it saves the user-inserted code from the previous version
+      and inserts it into the generated code. This saves you from
+      typing in all that method code from the book. Of course, if
+      you really want, you could delete all the method routines
+      from the list above before doing the "gen2" and the do all
+      that typing yourself...
+
+7. Depending on your platform, compile and link the five
+   executables.
+
+   On Windows, create MSVC (or any other C development tool)
+   projects for the five main programs. For the sake of being
+   specific, we describe the process using MSVC V2.0 with a few
+   parenthetical remarks for other systems.
+
+   a) On either windows platform, after installing ObjectBroker,
+      you have an environmental variable called "include" that
+      has in it the path to the ObjectBroker "orb.h" file. If
+      not, set it up for your environment.
+
+      (On other platforms, you also need access to "orb.h". See
+      the development environment instructions on how to supply
+      this access.)
+
+   b) Create each project as a "Console Application" in
+      directory "\mine\example". (Be sure to put it in the
+      "example"; this keeps project information separate from the
+      source information, in case you later decide to use the
+      same source with a different compiler.) Be careful not to
+      use another subdirectory yet in the MSVC project creation
+      dialog box. (Setting "Console Application" before entering
+      the project name means that MSVC won't automatically create
+      a new subdirectory subdirectory.)
+
+   c) MSVC will prompt you for files belonging to the project
+      immediately after creating it. The five projects and the
+      files that belong to them are as follows. (Remember that
+      the files are in "\mine". If you set the dialog box to
+      point there, MSVC will give you a list of all the ".c"
+      files and you can merely select them instead of typing
+      their names.)
+
+              CentralSrv
+                  cendsp.c
+                  central.c
+                  depot_m.c
+                  linear.c
+                  misc.c
+                  pnsstb.c
+
+              outsrv
+                  misc.c
+                  om.c
+                  om_m.c
+                  omdsp.c
+                  pnsstb.c
+
+              PNS
+                  linear.c
+                  misc.c
+                  pname_m.c
+                  pnamesvc.c
+                  pnsdsp.c
+
+              posclt
+                  im.c
+                  misc.c
+                  pnsstb.c
+                  pos_m.c
+                  posstb.c
+                  posterm.c
+                  postidsp.c
+                  stostb.c
+
+              store
+                  centstb.c
+                  misc.c
+                  pnsstb.c
+                  stodsp.c
+                  store.c
+                  store_ac.c
+                  store_m.c
+                  stostb.c
+                  tax.c
+
+         (If you are working on other platforms than Windows, use
+         this same list of files for whatever kind of development
+         environment you use.)
+
+   d) After selecting the files, you must tell MSVC where to
+      find the ObjectBroker library for linking. From the MSVC
+      menu, select "Project", then "Settings", then "Link". In
+      the "Link" dialog box, there is a list of "Object/Library
+      Modules". To the end of this list, add "obb32.lib" and exit
+      by pressing the "Okay" button.
+
+      (For other platforms, see your ObjectBroker documentation
+      to see how to specify the location of the "obb" library.)
+
+   e) You can then tell MSVC to build the project. If all goes
+      well, it should build with no errors or warnings.
+
+8. You can then run the example, as below. Alternately, by
+   choosing the appropriate settings in your development
+   environment or by using special debugging tools, you can run
+   each process in a separate debug window so that you can use
+   the debugger to set breakpoints and watch the flow of control.
+
+
+D. How to run the example
+-----------------------------------------
+
+The example is intended to be run from command line prompts and
+can be run on a single computer. You should create five separate
+command windows. (We could have created the example so that it
+worked from a single process, but we chose the five-process route
+to simplify your first exposure to CORBA. It is easier to
+understand what's going on this way, especially if you choose to
+compile the code in debug mode and step through it.)
+
+1. In each command window, set the default directory to the
+   directory containing the binaries. (If you are using Windows,
+   this might be "cd \mine\example\WinDebug". Replace "c:" with
+   the appropriate drive name if you installed the kit on a
+   different drive).
+
+2. The rest of the instructions are the same as in Chapter 33 of
+   the book. We repeat them here for completeness.
+
+   a. In window 1, type "pns" (without the quotes) to start the
+      pseudo-name-service.
+
+   b. In window 2, type "centralsrv" to start the central office
+      depot.
+
+   c. In window 3, type "store 26 10" to start store number 26
+      with a markup factor of 10.
+
+   d. In window 4, type "outsrv 12" to start the output printer
+      for POS station number 12.
+
+   e. In window 5, type "posclt 12 26" to start the POS station
+      12 and its associated input devices, connected to store 26.
+
+   When you are starting these processes, they provide some
+   debugging output that would probably not be provided in a
+   production system. We did this to make it easier for you
+   to follow the sequence of operations happening in this
+   distributed application.
+
+3. Window 5 will then prompt you to provide input by issuing
+   the prompt "input:". The first thing you must type is "L" to
+   log on at the (simulated) POS station. After that, try the
+   following as your first scenario.
+
+   a. Type "789789", which is the barcode of an item in the
+      store. You will see debugging output in some of the
+      windows. Window 4 (outsrv) produces the only "official"
+      output, a receipt line.
+
+   b. Type "234234", another barcode and see another receipt line,
+      this time with tax included.
+
+   c. Type "T" to get the totals printed for this sale.
+
+   d. After you've finished one or more sales, you might type "P"
+      to get the totals at this POS station or "S" to get the
+      totals for all POS stations in the store. (The latter will
+      contain just one POS stations in this example scenario.)
+
+
+E. Differences from the printed book
+------------------------------------
+
+The following are differences in the ObjectBroker example code or
+commands from the printed book, and perhaps from the other
+vendors' code. These are small differences, not terribly
+significant to the understanding of the CORBA structure of the
+example. We explain them here so that you won't get confused
+about the "why" of the differences.
+
+1. The "obb..." commands given in the two files "gen1.bat" and
+   "gen2.bat" are slightly different from those printed in the
+   book's ObjectBroker section in Chapter 23, "Compiling the
+   IDL". The ".bat" files should be used in place of those given
+   in the book if you have problems. There are two reasons for
+   this. First, there were indeed a couple errors in the order of
+   the parameters (blush). Second, the commands in the ".bat"
+   files are more consistent in the use of the case of names so
+   that the commands will work better on operating systems that
+   are sensitive to the case of file names. This involved using
+   more "-B" parameters on all implementation generation commands
+   (in file "gen2.bat) to force the case of include files to be
+   lower case; if "-B" isn't given, ObjectBroker uses upper case
+   for generated include file names.
+
+2. In the generation of dispatch routines for the POS, the book's
+   ObjectBroker section has an error in Chapter 23. It tells you
+   to put all dispatch routines into a single module via a single
+   "obbgen -lc -d..." command. Since we split the POS methods
+   into two processes, we must split the dispatch routines into
+   two pieces as well. See the gen2.bat file on the kit for the
+   correct command.
+
+3. Again, in the generation of dispatch routines for the POS, we
+   left out a final command line. This line is needed to
+   generate, not just a dispatch routine, but a "pos.imh" file
+   that is included in each dispatch file and method file. The
+   significance of the command is that definitions for all three
+   implementations end up in the same ".imh" file, so that the
+   same file can be included in all those files, without
+   wondering which to use. There are better ways of doing this in
+   ObjectBroker, but this is the easiest fix to the printed book.
+   The missing line is found in "gen2.bat", the last in the
+   section annotated as "rem ...For POS".
+
+4. In Store, StoreAccess, Tax, and POSterm modules: after
+   ResolveName, the ObjectBroker code is different than that
+   listed in the book. The book's code is incorrect only for
+   error conditions. The ResolveName method does not generate an
+   exception if it can't find a name, but rather sets the
+   returned object reference to null. However, the book's code
+   expects an exception and calls routine "handle_error" (in
+   module "misc.c") to terminate the process if it finds an
+   exception. Obviously, "handle_error" will never find an
+   exception in this case, but will merrily allow the calling
+   program think that it has a valid object reference as a result
+   of ResolveName, resulting in an ugly crash later. If you never
+   make a mistake in starting the various processes (that is, by
+   always getting the right numbers for stores and POS stations)
+   you won't run across this error.
+
+   The fix to the code is small. Instead of calling
+   "handle_error", the code on the ObjectBroker disk checks
+   the object reference. If it is NULL, the new code prints an
+   error message and terminates the process.
+
+5. In further testing the code with different compilers after the
+   book's freeze date, we came across a subtle problem in the C
+   code that generates warnings in some compilers. In C,
+   constants of the form "0.0" are interpreted as "double"
+   floating point values. In several places the code in book
+   assigns such constants to a "single" floating point variable,
+   causing some compilers to issue a warning that precision might
+   be lost. (This is a useful feature of such compilers, but it
+   may be disconcerting if you don't know the reason.) Getting
+   rid of the warning was easily fixed on the ObjectBroker disk
+   by merely appending an "f" to such variables to force the C
+   compiler to treat the constant as a "single" value;
+   for example, change the "0.0" to "0.0f".
+
+6. Again, testing with different compilers, we discovered
+   variables in a variety of routines which were declared but not
+   used, generating warnings from the compilers. These leftover
+   declarations were the result of the history of the development
+   of the code by the several authors. To make the code less
+   confusing and to the avoid the warnings by those compilers,
+   the ObjectBroker code has deleted these declarations.
+
+7. You will find a difference in the "store_ac.c" routine in the
+   ObjectBroker code that is an optimization that should have
+   been in the book but wasn't. When the StoreAccess_FindPrice
+   method gets a return from the Depot's FindItemInfo method that
+   indicates an exception, it needn't set that exception again
+   because the exception already exists in the environment. In
+   the ObjectBroker code the unnecessary setting of the exception
+   is deleted.
+
+
+
+F. Other things you might try
+-----------------------------
+
+The way the example is coded, only one POS station can be hooked
+up in the store if you run the POS stations on a single node.
+You will not run into this problem if you are using the multiple
+node configuration that was the design point of the example.
+
+The reason for this is as follows. If you followed the
+instructions in the book, you started up an OutputMedia server by
+running "outsrv 12" (for POS output for terminal 12) and the
+terminal itself by "posclt 12 26" (for terminal 12 in store 26).
+You might try to fire up a second POS on the same node by
+starting a new OutputMedia server, say "outsrv 15", and its
+associated terminal, say "posclt 15 26". However, if both are
+started on the same node you will discover that all output goes
+to the "outsrv 12" process rather that to the "outsrv 15"
+process. This behavious arises because, by default,
+implementation of all servers is via the "shared" model of CORBA.
+This means that "outsrv 12" registers an OutputMedia
+implementation and "outsrv 15" also registers an OutputMedia
+implementation, but there is nothing to distinguish them.
+Therefore, ObjectBroker will always find the first implementation
+since it is marked as "shared", meaning that it is able to
+service all requests of that type. Because of the way the book
+example was defined, the implementation of the OutputMedia server
+for "outsrv 12" then produces its output on its own process's
+console.
+
+If you would like to have the flexibility of running the
+OutputMedia server on the same node or different nodes,
+ObjectBroker allows this in several ways. The easiest is to use
+the feature that declares the server implementation as
+"one-server-per-object", in CORBA terms. Then when the client
+looks for a server for the object, it will find the particular
+server for the object, rather than just any server for the
+object. (Note that this will work whether the servers are in the
+same node or different nodes.) In ObjectBroker, the way to
+achieve this CORBA feature (which is not specified portably by
+CORBA) is to change a line in the default IML file for the POS,
+under the OutputMedia implementation. Change the line that says
+"activation_type(shared);" to "activation_type(unshared);". You
+should regenerate the routines that depend on the IML then, of
+course.
+
+CORBA rules then require a change in the main program for the
+OutputMedia server. This is driven by the CORBA requirement that
+an unshared server doesn't inform the ORB that an implementation
+is ready by calling "CORBA_BOA_impl_is_ready", but rather by
+calling "CORBA_BOA_obj_is_ready" (since the implementation works
+only for a single object). In order to make this call, however,
+you have to change the order of some operations in the main
+program code generated by ObjectBroker's QuickStart, which
+assumes the "shared" default. The changes are small and are
+listed in the below, in case you are interested.
+
+/*
+ * OutputMedia Server Main
+ * -----------------------
+ *
+ * This module contains the main() for an OutputMedia server based on POS.idl
+ * for Digital Equipment Corporation's (DEC) ObjectBroker C binding
+ * and some convenience routines for use by the main. It was originally
+ * generated by ObjectBroker's Quick Start utility and then modified to
+ * be a little closer to the other vendors.
+ *
+ * This version shows the differences required to make the server
+ * be "unshared" rather than "shared", so that several POS
+ * stations can run on the same computer.
+ *
+ */
+
+/* Include Files */
+#include <orb.h>
+#include <stdio.h>
+#include <string.h>
+#include "misc.h"
+#include "pos.imh"
+
+/*
+ *-----------------------------------------------------------------------------
+ * global variables
+ *-----------------------------------------------------------------------------
+ */
+
+CORBA_ImplementationDef   OutputMediaImpl;   /*filled by RegisterOutputMediaImpl routine, used by others*/
+CORBA_ORB                 TheOrb;
+CORBA_BOA                 TheBoa;
+
+/*
+ *-----------------------------------------------------------------------------
+ * Forward Declarations
+ *-----------------------------------------------------------------------------
+ */
+
+CORBA_boolean   RegisterOutputMediaImpl  (CORBA_Environment *ev, CORBA_Object omobj);
+void            OutputMediamain_clean_up (CORBA_Environment *ev);
+
+/*
+ *-----------------------------------------------------------------------------
+ * Special external declarations -- function prototypes
+ *-----------------------------------------------------------------------------
+ */
+
+CORBA_Object Create_POS_OutputMedia_Object(CORBA_long        argc,
+                                           CORBA_char        **argv,
+                                           CORBA_Environment *ev);
+
+
+/*
+ *
+ *  ROUTINE NAME: Main
+ *
+ *  FUNCTIONAL DESCRIPTION:
+ *
+ *      This is a platform independent main for the OutputMedia Server.
+ */
+CORBA_boolean main (int argc, char *argv[])
+{
+    /* local data declaration */
+    CORBA_Environment   ev;
+    CORBA_Object        omobj;
+
+    printf("\n***** OutputMedia Server Started Execution *****\n");
+
+    /* convenience declarations, for similarity to other implementations */
+    TheOrb = CORBA_DEC_ORB_OBJECT;
+    TheBoa = CORBA_DEC_BOA_OBJECT;
+
+    /* Register the implementation */
+    if (!RegisterOutputMediaImpl (&ev,omobj))  /*side effect: sets global OutputMediaImpl*/
+        {
+        OBB_ORB_rundown (TheOrb, &ev, (CORBA_Flags) 0);
+        IsException (&ev,(CORBA_string) "OBB_ORB_rundown failed \n");
+        return(0);
+        }
+
+    /*Create the object reference, register it with the name service*/
+    omobj=Create_POS_OutputMedia_Object(argc, argv, &ev );
+
+    /*declare implementation and object ready -- this is the main
+      difference in code from the "shared" version*/
+    CORBA_BOA_obj_is_ready (TheBoa, &ev, omobj, OutputMediaImpl);
+    if (IsException (&ev, (CORBA_string)"CORBA_BOA_object_is_ready failed \n"))
+            return (CORBA_FALSE);
+
+    /* Jump into the main loop. */
+    OBB_BOA_main_loop (TheOrb, &ev, (CORBA_Flags)0 );
+
+    /*Finished -- clean up so we don't leave any memory or registration information*/
+    OutputMediamain_clean_up(&ev);
+    return(0);
+}
+
+
+
+/*
+ *
+ *  ROUTINE NAME: RegisterOutputMediaImpl
+ *
+ *  FUNCTIONAL DESCRIPTION:
+ *
+ *      Routine to register and activate the OutputMedia implementation
+ *
+ */
+CORBA_boolean RegisterOutputMediaImpl (CORBA_Environment *ev, CORBA_Object omobj)
+{
+    /* Local Data Declaration */
+    CORBA_Flags reg_flags=0;
+
+    /* Register the OutputMediaImpl. OutputMediaImpl__register is created
+       in the dispatch file by the "obbgen -d" command.*/
+    OutputMediaImpl = OutputMediaImpl__register (
+                        OutputMediaImpl__OBJ,
+                        ev,
+                        (CORBA_NVList) NULL,   /*no additional attrs needed*/
+                        (CORBA_NVList) NULL,   /*no server selection needed*/
+                        reg_flags);
+    if ((OutputMediaImpl == NULL) || (IsException (ev,(CORBA_string)"")))
+        {
+        printf("OutputMediaImpl__register failed \n");
+        return(CORBA_FALSE);
+        }
+
+    /*Note the difference here, don't call the "activateImpl" routine
+      since it will call "CORBA_BOA_impl_is_ready". Instead the
+      main program calls "CORBA_BOA_obj_is_ready".*/
+    return(CORBA_TRUE);
+ }
+
+
+
+/*
+ *****************************************************************************
+ *
+ * Function Name : OutputMediamain_clean_up
+ *
+ * Role          : tidying up to be done.
+ *
+ *****************************************************************************
+ */
+
+void OutputMediamain_clean_up(CORBA_Environment *ev)
+{
+    /*The first two routines routines are provided through QuickStart, so use
+      them instead of worring about details*/
+    DeactivateImpl(OutputMediaImpl, ev);
+    UnregisterImpl(OutputMediaImpl, ev);
+    CORBA_Object_release((CORBA_Object)OutputMediaImpl, ev);
+    OBB_ORB_rundown (TheOrb, ev, (CORBA_Flags) 0);
+
+} /* end of OutputMediamain_clean_up() */

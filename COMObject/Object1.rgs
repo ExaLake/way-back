@@ -1,0 +1,26 @@
+HKCR
+{
+	COMObject.Object1.1 = s 'Object1 Class'
+	{
+		CLSID = s '{C1ADB651-A5BF-11D3-8651-00C01501BDC4}'
+	}
+	COMObject.Object1 = s 'Object1 Class'
+	{
+		CLSID = s '{C1ADB651-A5BF-11D3-8651-00C01501BDC4}'
+		CurVer = s 'COMObject.Object1.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C1ADB651-A5BF-11D3-8651-00C01501BDC4} = s 'Object1 Class'
+		{
+			ProgID = s 'COMObject.Object1.1'
+			VersionIndependentProgID = s 'COMObject.Object1'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{C1ADB643-A5BF-11D3-8651-00C01501BDC4}'
+		}
+	}
+}

@@ -1,0 +1,13 @@
+#! /bin/sh
+# @(#) 
+# @(#)  
+# @(#)   Change Upper-case letters in file names to lower-case letters
+# @(#)      
+
+#
+for i in *
+do 
+    mv $i `echo $i | tr '[A-Z]' '[a-z]'`
+done
+mv posclnt.c posClnt.c
+mv readme README

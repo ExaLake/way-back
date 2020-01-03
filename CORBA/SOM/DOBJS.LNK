@@ -1,0 +1,19 @@
+central.obj +
+initmod.obj +
+pos.obj +
+store.obj +
+db.obj +  
+pnamesvc.obj +
+util.obj +
+/exepack /packd /packc /align:4 /stack:360000 /pm:vio /noi /nol /nod /co /NOE
+dobjs.dll 
+nul
+somtk +
+dde4mbs +
+os2386  
+dobjs.def
+;
+
+
+
+

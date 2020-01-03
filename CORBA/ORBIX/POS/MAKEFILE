@@ -1,0 +1,51 @@
+include ../orbix.mk
+
+all: POSClient OutputServer
+	@echo
+
+	@echo "If Orbix.cfg is not in /etc, make sure that the"
+	@echo "environment variable IT_CONFIG_PATH is set to point to the"
+	@echo "location of Orbix.cfg. "
+	@echo
+	@echo "Make sure that the orbix daemon (orbixd) is running."
+	@echo "use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/orbixd &"
+	@echo
+	@echo "Ensure that the server (\"OutputSrv\") is registered using"
+	@echo "putit, use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/putit -h`hostname` OutputSrv \"`pwd`/OutputServerv <POSNr>\"""
+	@echo
+
+
+	
+
+OUTMED_OBJS	= ../idl/POSS.o ../idl/PNSC.o POS_OM.o Srv_Main.o ../PNS/FindPNS.o
+POSCLT_OBJS	= ../idl/POSC.o ../idl/CentralC.o ../idl/StoreC.o ../idl/PNSC.o POS_Ter.o \
+	   	  POS_IM.o POSClt.o ../PNS/FindPNS.o
+
+Srv_Main.o: Srv_Main.cc
+	$(C++) $(C++FLAGS) -c Srv_Main.cc
+
+POS_OM.o: POS_OM.cc
+	$(C++) $(C++FLAGS) -c POS_OM.cc
+
+POS_IM.o: POS_IM.cc
+	$(C++) $(C++FLAGS) -c POS_IM.cc
+
+POS_Ter.o: POS_Ter.cc
+	$(C++) $(C++FLAGS) -c POS_Ter.cc
+
+POSClt.o: POSClt.cc
+	$(C++) $(C++FLAGS) -c POSClt.cc
+
+OutputServer: $(OUTMED_OBJS)
+	$(C++) $(C++FLAGS) -o OutputServer $(OUTMED_OBJS) $(LDFLAGS) $(ITSRV) \
+	$(SYSLIBS)
+
+POSClient: $(POSCLT_OBJS)
+	$(C++) $(C++FLAGS)  -o POSClient $(POSCLT_OBJS) $(LDFLAGS) $(ITSRV) $(SYSLIBS)
+
+clean:
+	rm -rf core *.o POSClient OutputServer

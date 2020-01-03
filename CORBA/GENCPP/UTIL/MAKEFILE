@@ -1,0 +1,14 @@
+SOURCE.C   = FindPNS.C
+
+INCLUDE = -I. -I../interfaces -I../POS
+LIBRARY =  -L../interfaces -lidl
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = 
+
+include ../make.cfg
+
+all: $(OBJECTS)
+
+clean:
+	rm -f *.o core .make.state .nse_depinfo
+

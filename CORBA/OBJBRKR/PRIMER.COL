@@ -1,0 +1,6 @@
+ContextObject
+    Table OBB_DEFAULT_TABLE
+        OBB_REPOSITORY: OBB_STRING = "C:\CORBAOBB\PRIMER.IR";
+        OBB_DEFAULT_NODES: OBB_STRING = OBB_LOCAL;
+    End Table
+End ContextObject

@@ -1,0 +1,106 @@
+ #
+ #   (C) COPYRIGHT International Business Machines Corp. 1995
+ #   All Rights Reserved
+ #   Licensed Materials - Property of IBM
+ #   US Government Users Restricted Rights - Use, duplication or
+ #   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ #
+ #   DISCLAIMER OF WARRANTIES.
+ #   The following [enclosed] code is sample code created by IBM
+ #   Corporation. This sample code is not part of any standard or IBM
+ #   product and is provided to you solely for the purpose of assisting
+ #   you in the development of your applications.  The code is provided
+ #   "AS IS". IBM MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+ #   NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ #   FOR A PARTICULAR PURPOSE, REGARDING THE FUNCTION OR PERFORMANCE OF
+ #   THIS CODE.  IBM shall not be liable for any damages arising out of
+ #   your use of the sample code, even if they have been advised of the
+ #   possibility of such damages.
+ #
+ #   DISTRIBUTION.
+ #   This sample code can be freely distributed, copied, altered, and
+ #   incorporated into other software, provided that it bears the above
+ #   Copyright notice and DISCLAIMER intact.
+ #
+
+ #  
+ # This is the makefile for building the Point of Sale example
+ # on IBM's AIX operating system.
+ #
+
+CC	= cc -g
+LD	= ld
+AR	= ar
+LIBLIST	= -lc -lsomtk
+HEADERS	= pos.h pos.ih store.h store.ih central.h central.ih pnamesvc.ih \
+	  pnamesvc.h 
+EXPS	= central.exp store.exp pos.exp pnamesvc.exp
+SRC 	= pos.c store.c central.c pnamesvc.c posClnt.c util.c
+OBJS 	= central.o db.o pnamesvc.o initmod.o pos.o store.o  util.o
+IDLFILES= pos.idl central.idl store.idl pnamesvc.idl
+
+INCLUDEPATH= -I. -I$(SOMBASE)/include
+LIBPTH = $(LIBDIRPATH) -L$(SOMBASE)/lib -L.
+
+all: 	$(HEADERS) $(OBJS) dobjs.dll libdobjs.a exports.exp \
+	posClnt somdimpl
+
+clean:  cleanimpl
+	-rm -f $(OBJS)
+	-rm -f $(HEADERS)
+	-rm -f $(EXPS)
+	-rm -f posClnt dobjs.dll libdobjs.a load.map posClnt.o \
+               exports.exp pname.ref
+
+cleanimpl:	
+	-regimpl -D -i centralsvr
+	-regimpl -D -i pnssvr
+	-regimpl -D -i storesvr_1 
+	-regimpl -D -i outputsvr_1
+	-regimpl -D -i outputsvr_2
+	-rm -f somdimpl
+
+.SUFFIXES: .o .c .exp .idl .h .ih
+
+.idl.ih:
+	sc -sih $<
+
+.idl.h:
+	sc -sh $<
+
+.idl.exp:
+	sc -sexp $<
+
+.c.o:
+	$(CC) -c $(INCLUDEPATH) $<
+
+posClnt: posClnt.c pos.o central.o store.o posClnt.o util.o pnamesvc.o
+	$(CC) -o $@ posClnt.o $(LIBPTH) $(LIBLIST) -ldobjs
+
+somdimpl:
+	-regimpl -A -i centralsvr    -v ::CentralOffice::Depot
+	-regimpl -A -i pnssvr        -v PseudoNameService
+	-regimpl -A -i storesvr_1    -v ::AStore::Store
+	-regimpl -A -i outputsvr_1   -v ::POS::OutputMedia
+	-regimpl -A -i outputsvr_2   -v ::POS::OutputMedia
+	-regimpl -L -i centralsvr -i pnssvr -i storesvr_1 -i outputsvr_1 \
+        -i outputsvr_2
+	echo "" > somdimpl
+
+dobjs.dll: $(OBJS) exports.exp
+	$(LD) -o $@ -e SOMInitModule $(OBJS) -bE:exports.exp \
+        -bM:SRE -T512 -H512 -bloadmap:load.map $(LIBPTH) $(LIBLIST)     
+
+libdobjs.a: dobjs.dll
+	$(AR) ruv $@ exports.exp
+
+exports.exp: $(EXPS)
+	cat $(EXPS) util.exp posterm.exp | tr ';' '*' > exports.exp
+
+
+
+
+
+
+
+

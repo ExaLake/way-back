@@ -1,0 +1,99 @@
+This file provides information on the example program that is part of
+the book "CORBA Fundamentals and Programming" published by John Wiley &
+Sons.  The following steps provide an explanation of how to install,
+build, and run this software.  For a detailed expanation of the of the
+application, please refer to the referenced book.
+
+Information on running the IDL compiler can be found in the PowerBroker
+Users Guide.
+
+This file is part of the release dated 3-4-96.
+
+Step 1) Check for updates since the book's publication
+
+Note that the software distributed on the diskette has been tested under
+Solaris 2.4.  Please visit Expersoft's WWW server (see URL below) to
+obtain a version for a different environment.
+
+Expersoft maintains an updated copy of this file and the source code
+on its World Wide Web Homepage and anonymous FTP server.  Please look
+at the information at the URL:
+
+   http://www.expersoft.com/res_cntr/primer
+
+This README file and the source code is available via anonymous FTP at the following location:
+
+   host:   maxwell.expersoft.com
+   login:  anonymous
+   file:   /pub/primer/pb/README
+   file:   /pub/primer/pb/pbexample.tar.Z
+
+2) Change History
+
+11-22-95
+
+Initial version of example as submitted to publisher
+
+3) Installation from Diskette
+
+If you copy the directory tree from the diskette to a hard drive and notice
+that all the file names are upper case, run the script 'fixnames' located in 
+the top directory of the example.  fixnames renames the files to match those 
+used in the book.  To run it (under csh) type:
+
+  % source FIXNAMES
+
+Or, use the archive as indicated below.  You can either download it or 
+copy it from the diskette.
+
+If you downloaded this software from Expersoft's FTP server to your
+computer, enter the following commands to install the source tree:
+
+  // Assuming you downloaded the file to the /tmp directory,
+  // create a directory for the source tree and copy the archive into it
+  % mkdir pb
+  % cd pb
+  % cp /tmp/pbexample.tar.Z pbexample.tar.Z
+  % uncompress pbexample.tar.Z
+  % tar xvf pbexample.tar
+
+4) Compilation Instructions
+
+This software has been compiled and tested under Solaris 2.4 using the Sun C++
+compiler version 4.0.1.
+
+Assuming PowerBroker and your C++ compiler have been properly installed, type
+'make' to compile the 5 programs that comprise the example.  The 'makefile'
+will enter each subdirectory and compile and link as appropriate.  If
+the example is located in the directory /usr/pb, then type the
+following commands to compile the example:
+
+  % cd /usr/pb
+  % make
+
+3) How to run the example
+
+Open 5 X-Terminals and change to the 'bin' directory under the installation
+directory.  For example, if you installed the example in /usr/pb, type
+the following command:
+
+   % cd /usr/pb/bin
+
+From the bin directory, start the programs, one in each window, as follows.
+Note that the programs should be started in the order listed.
+
+   % PNSServer
+   % CentralServer
+   % StoreServer 1 1.1
+   % outServer 1
+   % POSclt 1 1
+
+The arguments to StoreServer are the store number and markup
+percent. This markup is used as follows:
+   price = markup * cost
+The argument to outSrv is a POS number.
+The arguments to POSclt are a store number and POS number.
+
+Multiple POS Terminals can be started by opening additional windows and
+running outSrv and POSclt.  Each pair (i.e., outSrv and POSclt) should use
+store number '1' and a new POS number.

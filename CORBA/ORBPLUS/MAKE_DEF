@@ -1,0 +1,105 @@
+#(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+#          
+#   To anyone who acknowledges that this file is provided "AS IS" 
+#   WITH NO EXPRESS OR IMPLIED WARRANTY:
+#   permission to use, copy, modify, and distribute this file for any 
+#   purpose is hereby granted without fee, provided that the above 
+#   copyright notice and this notice appear in all copies, and that 
+#   the name of Hewlett-Packard Company not be used in advertising or 
+#   publicity pertaining to distribution of the software without 
+#   specific, written prior permission.  Hewlett-Packard Company 
+#   makes no representations about the suitability of this software 
+#   for any purpose.
+
+
+
+
+HPORB_ROOT=
+HPORB_HOME=/opt/orbplus
+HPORB_HOME_BIN=$(HPORB_ROOT)$(HPORB_HOME)/bin
+HPORB_HOME_LIB=$(HPORB_ROOT)$(HPORB_HOME)/lib
+HPORB_HOME_INCLUDE=$(HPORB_ROOT)$(HPORB_HOME)/include
+
+#
+# C++ compiler (which is also used to link)
+#
+CXX             = /usr/bin/CC
+LD              = $(CXX)
+
+#
+# The HP CORBA Interface Definition Language (CIDL) compielr.
+#
+CIDL            = $(HPORB_HOME_BIN)/cidl
+
+#
+# The include search list contains the current directory and the included
+# file directory supplied with ORB Plus.
+#
+
+INCLUDE_IDL     = ../Idl
+INCLUDE_PNS     = ../PNS
+
+INCLUDES        =\
+                -I. \
+                -I$(HPORB_HOME_INCLUDE) \
+                -I$(INCLUDE_IDL)\
+                -I$(INCLUDE_PNS)
+
+
+#
+# Symbols for the libraries needed to link the application. We are linking with
+# a threads package.  There is a "null threads" package supplied if threads are
+# not needed.
+#
+LIB_ORBPLUS	= -L $(HPORB_HOME_LIB) -lorbplus	
+#LIB_THREADS     = -L $(HPORB_HOME_LIB) -lmsdthread_null
+LIB_THREADS     = -L $(HPORB_HOME_LIB) -lmsdthread_pt4 -ldce -lc_r
+
+#
+# The Internet Inter-ORB Protocol (IIOP) message transport.
+#
+IIOP_TRANSPORT  = $(HPORB_HOME_LIB)/iiop_loader.o -L $(HPORB_HOME_LIB) -liiop
+
+#
+# The DCE Common Inter-ORB Protocol (DCE-CIOP) message transport.
+#
+DCECIOP_TRANSPORT = $(HPORB_HOME_LIB)/dceciop_loader.o -L $(HPORB_HOME_LIB) -ldceciop
+
+#
+# These are the files which the CIDL compiler will generate.
+#
+IFFILES         = helloTypes.o helloServer.o
+
+
+####
+#
+# The IIOP transport is used in this example, by default. To use the DCE-CIOP
+# transport, set TRANSPORTS to DCECIOP_TRANSPORT
+#
+TRANSPORTS      = $(IIOP_TRANSPORT)
+####TRANSPORTS      = $(DCECIOP_TRANSPORT)
+
+LIBS            =\
+                $(LIB_ORBPLUS) \
+                $(LIB_THREADS) -lM
+
+CXXFLAGS        =\
+                -g1 -Aa +a1 +DA1.0 +Z -pth -ptb -DNDEBUG\
+                -D_HPUX_SOURCE \
+                $(INCLUDES)
+
+LDFLAGS         =\
+                $(CXXFLAGS)
+
+#
+# When linking with null threads uncomment this line and comment the nexxt line
+#
+#LD_BINDOPTS=
+LD_BINDOPTS=    -Wl,-Bimmediate -Wl,-Bnonfatal -ptb
+
+
+IFFILES                 = ../Idl/StoreTypes.o ../Idl/StoreServer.o \
+                          ../Idl/CentralTypes.o ../Idl/CentralServer.o \
+                          ../Idl/POSTypes.o ../Idl/POSServer.o \
+                          ../Idl/PNSTypes.o ../Idl/PNSServer.o \
+                          ../PNS/FindPNS.o

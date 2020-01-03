@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DrawCtl - Win32 Unicode Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSPC6C.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "_DEBUG" /D "_UNICODE" /D "WIN32" /D "_WINDOWS" /D "_WINDLL" /D "_MBCS" /D "_USRDLL" /D "_WIN32_DCOM" /Fp".\DebugU/DrawCtl.pch" /Yu"stdafx.h" /Fo".\DebugU/" /Fd".\DebugU/" /FD /c 
+"C:\Development\Code Samples\DCOM\DrawCtl\Draw.cpp"
+"C:\Development\Code Samples\DCOM\DrawCtl\DrawCtl.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSPC6C.tmp" 
+Creating temporary file "C:\TEMP\RSPC6D.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:yes /pdb:".\DebugU/DrawCtl.pdb" /debug /machine:I386 /def:".\DrawCtl.def" /out:".\DebugU/DrawCtl.dll" /implib:".\DebugU/DrawCtl.lib" 
+".\DebugU\Draw.obj"
+".\DebugU\DrawCtl.obj"
+".\DebugU\StdAfx.obj"
+".\DebugU\DrawCtl.res"
+]
+Creating command line "link.exe @C:\TEMP\RSPC6D.tmp"
+Creating temporary file "C:\TEMP\RSPC6E.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\DebugU\DrawCtl.dll"
+echo regsvr32 exec. time > ".\DebugU\regsvr32.trg"
+]
+Creating command line "C:\TEMP\RSPC6E.bat"
+Compiling...
+Draw.cpp
+c:\development\code samples\dcom\drawctl\draw.h(15) : fatal error C1083: Cannot open include file: '..\\drawserv\\drawserv.h': No such file or directory
+DrawCtl.cpp
+c:\development\code samples\dcom\drawctl\draw.h(15) : fatal error C1083: Cannot open include file: '..\\drawserv\\drawserv.h': No such file or directory
+Generating Code...
+Error executing cl.exe.
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+DrawCtl.dll - 2 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

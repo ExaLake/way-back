@@ -1,0 +1,14 @@
+SOURCE.C   = FindPNS.C
+
+INCLUDE = -I. -I../IDL -I../POS -I$(PBHOME)/include
+LIBRARY =  -L../IDL -L$(PBHOME)/lib -lstubs -lcorba -lpbroker
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = 
+
+include $(PBHOME)/make/make.cfg
+
+all: $(OBJECTS)
+
+clean:
+	rm -f *.o core .make.state .nse_depinfo
+

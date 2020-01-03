@@ -1,0 +1,60 @@
+#ifndef POS_IDL
+#define POS_IDL
+
+// File pos.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in the Point Of Sale
+// terminal in a food store
+//
+
+module POS {
+
+   typedef long   POSId;
+   typedef string Barcode;
+
+   interface InputMedia {
+
+      typedef string OperatorCmd;
+
+      void         BarcodeInput(in Barcode Item);
+      void         KeypadInput(in OperatorCmd Cmd);
+
+   };
+
+   interface OutputMedia {
+
+      boolean      OutputText(in string StringToPrint );
+
+   };
+
+   interface POSTerminal {
+
+
+      void  Login();
+      void  PrintPOSSalesSummary();
+      void  PrintStoreSalesSummary();
+      void  SendBarcode(in Barcode Item);
+      void  ItemQuantity (in long Quantity);
+      void  EndOfSale();
+
+   };
+
+};
+
+#endif
+#pragma repository_id( "POS::POSId", "7049337f6cf6.0c.bb.09.00.00.00.00.00")
+#pragma repository_id( "POS::Barcode", "7049337f6cf7.0c.bb.09.00.00.00.00.00")
+#pragma interface_id( "POS::InputMedia", "7049337f6cf8.0c.bb.09.00.00.00.00.00")
+#pragma repository_id( "POS::InputMedia::OperatorCmd", "7049337f6cf9.0c.bb.09.00.00.00.00.00")
+#pragma operation_id( "POS::InputMedia::BarcodeInput", "7049337f6cfa.0c.bb.09.00.00.00.00.00", 1)
+#pragma operation_id( "POS::InputMedia::KeypadInput", "7049337f6cfb.0c.bb.09.00.00.00.00.00", 2)
+#pragma interface_id( "POS::OutputMedia", "7049337f6cfc.0c.bb.09.00.00.00.00.00")
+#pragma operation_id( "POS::OutputMedia::OutputText", "7049337f6cfd.0c.bb.09.00.00.00.00.00", 1)
+#pragma interface_id( "POS::POSTerminal", "7049337f6cfe.0c.bb.09.00.00.00.00.00")
+#pragma operation_id( "POS::POSTerminal::Login", "7049337f6cff.0c.bb.09.00.00.00.00.00", 1)
+#pragma operation_id( "POS::POSTerminal::PrintPOSSalesSummary", "7049337f6d00.0c.bb.09.00.00.00.00.00", 2)
+#pragma operation_id( "POS::POSTerminal::PrintStoreSalesSummary", "7049337f6d01.0c.bb.09.00.00.00.00.00", 3)
+#pragma operation_id( "POS::POSTerminal::SendBarcode", "7049337f6d02.0c.bb.09.00.00.00.00.00", 4)
+#pragma operation_id( "POS::POSTerminal::ItemQuantity", "7049337f6d03.0c.bb.09.00.00.00.00.00", 5)
+#pragma operation_id( "POS::POSTerminal::EndOfSale", "7049337f6d04.0c.bb.09.00.00.00.00.00", 6)

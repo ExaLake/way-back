@@ -1,0 +1,104 @@
+/************************************
+  REVISION LOG ENTRY
+  Revision By: Mihai Filimon
+  Revised on 10/8/98 5:36:39 PM
+  Comments: XFloorWnd.odl : type library source for ActiveX Control project.
+ ************************************/
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (XFloorWnd.tlb) that will become a resource in
+// XFloorWnd.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(24FFD1EA-5EA9-11D2-86B1-0040055C08D9), version(1.0),
+  helpfile("XFloorWnd.hlp"),
+  helpstring("XFloorWnd ActiveX Control module"),
+  control ]
+library XFLOORWNDLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CXFloorWndCtrl
+
+	[ uuid(24FFD1EB-5EA9-11D2-86B1-0040055C08D9),
+	  helpstring("Dispatch interface for XFloorWnd Control"), hidden ]
+	dispinterface _DXFloorWnd
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CXFloorWndCtrl)
+			[id(DISPID_BACKCOLOR), bindable, requestedit] OLE_COLOR BackColor;
+			[id(1)] boolean Animation;
+			[id(2)] long Sleep;
+			[id(3)] boolean Sign;
+			[id(4)] BSTR Pages;
+			[id(DISPID_FONT), bindable] IFontDisp* Font;
+			[id(5)] boolean AsPage;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CXFloorWndCtrl)
+			[id(6)] short AddPage(BSTR sName);
+			[id(7)] boolean DeletePage(short nIndex);
+			[id(8)] BSTR GetPageName(short nIndex);
+			[id(9)] short GetPage(BSTR lpszPageName);
+			[id(10)] boolean ActivatePage(short nIndex);
+			[id(11)] boolean AttachWindow(short nIndex, long pWnd);
+			[id(12)] boolean SetPageName(short nIndex, BSTR lpszPageName);
+			[id(13)] void Init();
+			[id(21), propget] short Height(short nIndex);
+			[id(21), propput] void Height(short nIndex, short nNewValue);
+			[id(22), propget] OLE_COLOR Color(short nIndex);
+			[id(22), propput] void Color(short nIndex, OLE_COLOR nNewValue);
+			[id(23), propget] long UserData(short nIndex);
+			[id(23), propput] void UserData(short nIndex, long nNewValue);
+			[id(14)] short GetActivePage();
+			[id(15)] long GetPagesCount();
+			[id(16)] boolean IsPage(short nIndex);
+			[id(17)] long GetLeftTopPage(short nIndex);
+			[id(18)] long GetBottomRightPage(short nIndex);
+			[id(19)] void StyleAs(boolean bAsFloor);
+			[id(20)] long GetHWnd(long nIndex);
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CXFloorWndCtrl
+
+	[ uuid(24FFD1EC-5EA9-11D2-86B1-0040055C08D9),
+	  helpstring("Event interface for XFloorWnd Control") ]
+	dispinterface _DXFloorWndEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CXFloorWndCtrl)
+			[id(DISPID_CLICK)] void Click();
+			[id(1)] void ActivatePage(short nIndex);
+			[id(2)] void ClickOnActivePage(short nIndex);
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CXFloorWndCtrl
+
+	[ uuid(24FFD1ED-5EA9-11D2-86B1-0040055C08D9),
+	  helpstring("XFloorWnd Control"), control ]
+	coclass XFloorWnd
+	{
+		[default] dispinterface _DXFloorWnd;
+		[default, source] dispinterface _DXFloorWndEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

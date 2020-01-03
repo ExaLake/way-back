@@ -1,0 +1,36 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DialogTester - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP1D1.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/DialogTester.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Project\DialogTester\DialogTesterDlg.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP1D1.tmp" 
+Creating temporary file "C:\TEMP\RSP1D2.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/DialogTester.pdb" /debug /machine:I386 /out:"Debug/DialogTester.exe" /pdbtype:sept 
+.\Debug\_activelistbox.obj
+.\Debug\DialogTester.obj
+.\Debug\DialogTesterDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\DialogTester.res
+]
+Creating command line "link.exe @C:\TEMP\RSP1D2.tmp"
+<h3>Output Window</h3>
+Compiling...
+DialogTesterDlg.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+DialogTester.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

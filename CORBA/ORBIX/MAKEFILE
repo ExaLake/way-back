@@ -1,0 +1,150 @@
+default: 
+	@echo "Please run"
+	@echo 
+	@echo "make rename"
+	@echo "     - to rename the files to the proper names, followed by"
+	@echo
+	@echo "make all"
+	@echo "     - to do the compilation, then"
+	@echo
+	@echo "make reg"
+	@echo "     - to register the servers, and finally"
+	@echo
+	@echo "make run"
+	@echo "     - to launch the servers in the right order"
+	@echo "       and run the client."
+	@echo
+	@echo "Alternatively 'make regandrun' will do the last two steps in one go."
+
+all: 
+	(cd idl; $(MAKE))
+	(cd PNS; $(MAKE))
+	(cd Central; $(MAKE))
+	(cd Store; $(MAKE))
+	(cd POS; $(MAKE))
+	(cd Launcher; $(MAKE))
+	@echo
+	@echo "Make sure that you set IT_CONFIG_PATH and also"
+	@echo " run the orbixd daemon."
+	@echo
+
+
+clean: 
+	(cd idl; make clean)
+	(cd PNS; make clean)
+	(cd Central; make clean)
+	(cd Store; make clean)
+	(cd POS; make clean)
+	(cd Launcher; make clean)
+
+
+rename:
+	(mv CENTRAL Central)
+	(mv LAUNCHER Launcher)
+	(mv MAKEFILE Makefile)
+	(mv STORE Store)
+	(mv IDL idl)
+	(mv DEPOT.DAT depot.dat)
+	(mv ORBIX.MK orbix.mk)
+	#
+	(mv Central/DEPOTDAT.CC Central/DepotData.cc)
+	(mv Central/DEPOTDAT.H Central/DepotData.h)
+	(mv Central/DEPOT_I.CC Central/Depot_i.cc)
+	(mv Central/DEPOT_I.H Central/Depot_i.h)
+	(mv Central/MAKEFILE Central/Makefile)
+	(mv Central/SRV_MAIN.cc Central/Srv_Main.cc)
+	#
+	(mv idl/CENTRAL.IDL idl/Central.idl)
+	(mv idl/MAKEFILE idl/Makefile)
+	(mv idl/PNS.IDL idl/PNS.idl)
+	(mv idl/POS.IDL idl/POS.idl)
+	(mv idl/STORE.IDL idl/Store.idl)
+	#
+	(mv Launcher/LAUNCHER.CC Launcher/Launcher.cc)
+	(mv Launcher/MAKEFILE Launcher/Makefile)
+	#
+	(mv PNS/FINDPNS.CC PNS/FindPNS.cc)
+	(mv PNS/FINDPNS.H PNS/FindPNS.h)
+	(mv PNS/MAKEFILE PNS/Makefile)
+	(mv PNS/PNSDATA.CC PNS/PNSData.cc)
+	(mv PNS/PNSDATA.H PNS/PNSData.h)
+	(mv PNS/PNS_I.CC PNS/PNS_i.cc)
+	(mv PNS/PNS_I.H PNS/PNS_i.h)
+	(mv PNS/SRV_MAIN.CC PNS/Srv_Main.cc)
+	#
+	(mv POS/MAKEFILE POS/Makefile)
+	(mv POS/POSCLT.CC POS/POSClt.cc)
+	(mv POS/POS_IM.CC POS/POS_IM.cc)
+	(mv POS/POS_IM.H POS/POS_IM.h)
+	(mv POS/POS_OM.CC POS/POS_OM.cc)
+	(mv POS/POS_OM.H POS/POS_OM.h)
+	(mv POS/POS_TER.CC POS/POS_Ter.cc)
+	(mv POS/POS_TER.H POS/POS_Ter.h)
+	(mv POS/SRV_MAIN.CC POS/Srv_Main.cc)
+	#
+	(mv Store/MAKEFILE Store/Makefile)
+	(mv Store/SRV_MAIN.CC Store/Srv_Main.cc)
+	(mv Store/STORE_I.CC Store/Store_i.cc)
+	(mv Store/STORE_I.H Store/Store_i.h)
+
+rename-back:
+	(mv Central/DepotData.cc Central/DEPOTDAT.CC)
+	(mv Central/DepotData.h Central/DEPOTDAT.H)
+	(mv Central/Depot_i.cc Central/DEPOT_I.CC)
+	(mv Central/Depot_i.h Central/DEPOT_I.H)
+	(mv Central/Makefile Central/MAKEFILE)
+	(mv Central/Srv_Main.cc Central/SRV_MAIN.cc)
+	#
+	(mv idl/Central.idl idl/CENTRAL.IDL)
+	(mv idl/Makefile idl/MAKEFILE)
+	(mv idl/PNS.idl idl/PNS.IDL)
+	(mv idl/POS.idl idl/POS.IDL)
+	(mv idl/Store.idl idl/STORE.IDL)
+	#
+	(mv Launcher/Launcher.cc Launcher/LAUNCHER.CC)
+	(mv Launcher/Makefile Launcher/MAKEFILE)
+	#
+	(mv PNS/FindPNS.cc PNS/FINDPNS.CC)
+	(mv PNS/FindPNS.h PNS/FINDPNS.H)
+	(mv PNS/Makefile PNS/MAKEFILE)
+	(mv PNS/PNSData.cc PNS/PNSDATA.CC)
+	(mv PNS/PNSData.h PNS/PNSDATA.H)
+	(mv PNS/PNS_i.cc PNS/PNS_I.CC)
+	(mv PNS/PNS_i.h PNS/PNS_I.H)
+	(mv PNS/Srv_Main.cc PNS/SRV_MAIN.CC)
+	#
+	(mv POS/Makefile POS/MAKEFILE)
+	(mv POS/POSClt.cc POS/POSCLT.CC)
+	(mv POS/POS_IM.cc POS/POS_IM.CC)
+	(mv POS/POS_IM.h POS/POS_IM.H)
+	(mv POS/POS_OM.cc POS/POS_OM.CC)
+	(mv POS/POS_OM.h POS/POS_OM.H)
+	(mv POS/POS_Ter.cc POS/POS_TER.CC)
+	(mv POS/POS_Ter.h POS/POS_TER.H)
+	(mv POS/Srv_Main.cc POS/SRV_MAIN.CC)
+	#
+	(mv Store/Makefile Store/MAKEFILE)
+	(mv Store/Srv_Main.cc Store/SRV_MAIN.CC)
+	(mv Store/Store_i.cc Store/STORE_I.CC)
+	(mv Store/Store_i.h Store/STORE_I.H)
+	#
+	(mv Central CENTRAL)
+	(mv Launcher LAUNCHER)
+	(mv Makefile MAKEFILE)
+	(mv Store STORE)
+	(mv idl IDL)
+	(mv depot.dat DEPOT.DAT)
+	(mv orbix.mk ORBIX.MK)
+
+regandrun:
+	reg run
+
+reg:
+	(putit CentralSrv `pwd`/Central/CentralServer)
+	(putit StoreSrv `pwd`/Store/StoreServer 2 0.2)
+	(putit OutputSrv `pwd`/POS/OutputServer 5)
+	(putit PNSSrv `pwd`/PNS/PNSServer)
+
+run:
+	(Launcher/Launcher)
+	(POS/POSClient 2 5)

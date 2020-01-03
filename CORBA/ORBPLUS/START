@@ -1,0 +1,17 @@
+
+./PNS/Srv_Main&
+
+./Central/Srv_Main&
+
+./Store/Srv_Main 10 2.0&
+
+./POS/Srv_Main 30&
+
+./POS/POSClt 10 30
+
+
+
+
+
+
+

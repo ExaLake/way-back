@@ -1,0 +1,39 @@
+// COMObject.idl : IDL source for COMObject.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (COMObject.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(C1ADB650-A5BF-11D3-8651-00C01501BDC4),
+		dual,
+		helpstring("IObject1 Interface"),
+		pointer_default(unique)
+	]
+	interface IObject1 : IDispatch
+	{
+		[id(1), helpstring("method PopMessageBox")] HRESULT PopMessageBox(CHAR* message, INT hWnd);
+	};
+
+[
+	uuid(C1ADB643-A5BF-11D3-8651-00C01501BDC4),
+	version(1.0),
+	helpstring("COMObject 1.0 Type Library")
+]
+library COMOBJECTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(C1ADB651-A5BF-11D3-8651-00C01501BDC4),
+		helpstring("Object1 Class")
+	]
+	coclass Object1
+	{
+		[default] interface IObject1;
+	};
+};

@@ -1,0 +1,17 @@
+SOURCE.C   = store_i.C \
+             Srv_Main.C
+
+APPL = StoreServer
+INCLUDE = -I. -I../IDL -I../POS -I../util
+LIBRARY =  -L../IDL -lidl
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = ../util/FindPNS.o
+
+include ../make.cfg
+
+all $(APPL): $(OBJECTS) 
+	$(CC) -g -o $(APPL) $(OBJECTS) $(OTHEROBJS) $(LIBRARY)
+
+clean:
+	rm -f *.o $(APPL) core .nse_depinfo .make.state
+

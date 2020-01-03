@@ -1,0 +1,148 @@
+/********************************************************
+ FILE: neo/interfaces/store.idl
+
+ DISCLAIMER: This code associated with this publication is intended to
+ server solely as a programming example.  While this code is believed
+ to be accurate, none of the Copyright holders makes any warranty of
+ any kind for this code including but not limited to the implied
+ warranties of merchantability and fitness for a particular purpose.
+ None of the Copyright holders shall be liable for errors contained
+ herein, or for incidental or consequential damages in connection with
+ the furnishing, performance or use of this material at any time.
+
+ Copyright 1995 by
+  Object Management Group
+  IONA Technologies, Ltd.
+  Expersoft Inc.
+  SunSoft, Inc.
+  IBM Inc.
+  Hewlett-Packard Company, Inc.
+  International Computers Ltd.
+  Digital Equipment Corporation
+ All rights are reserved under the applicable copyright laws.
+
+********************************************************/
+#ifndef STORE_IDL
+#define STORE_IDL
+
+// File store.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in a chain food store
+// Point of Sale (POS) System.
+//
+// Author:
+// Hal Mirsky 5-14-95
+//
+// Modification History
+//
+// Date             By          Notes
+// 5-22-95          H Mirsky    remove Interface() methods,
+//                              POSTerminal::itemPrice
+// 5-25-95          S Baker     added StoreMng interface.
+//                              changed login() to return boolean.
+//                              changed getPOSTotals to return
+// 5-27-95          H Mirsky    use naming conventions for identifiers
+// 5-28-95          D Frantz    added store_access_reference to POSInfo
+//                              changed get_POS_totals to in par rather
+//                                 than return value
+//                              added store_id par to find_price
+// 6-14-95          D Frantz    added quantity to ItemInfo for simplicity
+//                                 of server & database code
+//                              move ItemInfo struct here from Central to
+//                                 reduce number of includes
+// 6-15-95          D Frantz    changed CORBA_Object type to just Object.
+//                              added parameter name to get_POS_totals
+// 6-16-95          H Mirsky    changed POSInfo to own a StoreAccess
+//                              reference instead of an Object
+// 7-7-95           H Mirsky    add attributes to StoreAccess: markup,
+//                              storeid, tax reference, depot reference.
+//                              move types into central.idl
+// 7-13-95          H Mirsky    move types (ItemType, AStoreId, ItemInfo, BarcodeNotFound)
+//                              back from central.idl.  Remove four attributes of
+//                              StoreAccess (they will be in implementation only)
+// 7-17-95          H Mirsky    change store_tax_totals and store_totals to single struct
+//                              attribute (see comment below).
+
+// include interface definition for Point Of Sale objects
+#include "pos.idl"
+
+module AStore {
+
+   enum ItemTypes {food, clothes, other};
+   typedef long AStoreId;
+
+   struct ItemInfo {
+      POS::Barcode      item;
+      ItemTypes         itemtype;
+      float             itemcost;
+      string            name;
+      long              quantity;
+   };
+
+   // The barcodeNotFound exception indicates that the
+   // input barcode does not match to any known item.
+   exception BarcodeNotFound { POS::Barcode item; };
+
+   interface StoreAccess; // /forward reference
+
+   struct POSInfo {
+        POS::POSId   id;
+        StoreAccess  store_access_reference;
+        float        total_sales;
+        float        total_taxes;
+   };
+
+   typedef sequence <POSInfo> POSList;
+
+   interface Tax {
+
+      float calculate_tax(in float          taxable_amount);
+
+      float find_taxable_price(in float     item_price
+                              ,in ItemTypes in_itemtype);
+
+   };
+
+   interface Store {
+
+        struct StoreTotals {
+           float     store_total;
+           float     store_tax_total;
+        };
+
+        readonly attribute AStoreId store_id;
+
+        // The struct StoreTotals and this readonly attribute are used
+        // in place of a pair of float attributes to avoid data inconsistencies
+        // that would result from the following sequence of operations:
+        //
+        //    POS 1 invokes a method to read store_total
+        //    POS 2 invokes the method update_store_totals
+        //    POS 1 invoikes a method to read the store_tax_total
+        readonly attribute StoreTotals totals;
+
+        StoreAccess login(in POS::POSId id);
+        void      get_POS_totals(out POSList POS_list);
+        void      update_store_totals(
+                      in POS::POSId id
+                     ,in float      price
+                     ,in float      taxes);
+   };
+
+   interface StoreAccess {
+
+      // itemtaxprice is 0 or return value of FindTaxablePrice()
+      void      find_price(
+                      in  POS::Barcode item
+                     ,in  long         quantity
+                     ,in  AStoreId     store_id
+                     ,out float        item_price
+                     ,out float        item_tax_price
+                     ,out ItemInfo     item_info)
+         raises (BarcodeNotFound);
+
+   };
+
+};
+#endif

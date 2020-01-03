@@ -1,0 +1,44 @@
+--------------------Configuration: DialogGL - Win32 Debug--------------------
+Begining build with project "D:\Pierre\Works\Src\OpenGL\Demos\TextureLighting\DialogGL.dsp", at root.
+Active configuration is Win32 (x86) Application (based on Win32 (x86) Application)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Debug/DialogGL.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c "
+			"OLE Type Library Maker" with flags "/nologo /D "_DEBUG" /mktyplib203 /o NUL /win32 "
+			"Win32 Resource Compiler" with flags "/l 0x40c /fo"Debug/DialogGL.res" /d "_DEBUG" /d "_AFXDLL" "
+			"Browser Database Maker" with flags "/nologo /o"Debug/DialogGL.bsc" "
+			"COFF Linker for 80x86" with flags "opengl32.lib glu32.lib glaux.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/DialogGL.pdb" /debug /machine:I386 /out:"Debug/DialogGL.exe" /pdbtype:sept "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating command line "rc.exe /l 0x40c /fo"Debug/DialogGL.res" /d "_DEBUG" /d "_AFXDLL" "D:\Pierre\Works\Src\OpenGL\Demos\TextureLighting\DialogGL.rc"" 
+Creating temp file "C:\TEMP\RSP15B.tmp" with contents </nologo /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Debug/DialogGL.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\Pierre\Works\Src\OpenGL\Demos\TextureLighting\DialogGL.cpp"
+"D:\Pierre\Works\Src\OpenGL\Demos\TextureLighting\DialogGLDlg.cpp"
+"D:\Pierre\Works\Src\OpenGL\Demos\Src\Texture.cpp"
+>
+Creating command line "cl.exe @C:\TEMP\RSP15B.tmp" 
+Creating temp file "C:\TEMP\RSP15C.tmp" with contents </nologo /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"Debug/DialogGL.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"D:\Pierre\Works\Src\OpenGL\Demos\TextureLighting\StdAfx.cpp"
+>
+Creating command line "cl.exe @C:\TEMP\RSP15C.tmp" 
+Creating temp file "C:\TEMP\RSP15D.tmp" with contents <opengl32.lib glu32.lib glaux.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/DialogGL.pdb" /debug /machine:I386 /out:"Debug/DialogGL.exe" /pdbtype:sept 
+.\Debug\DialogGL.obj
+.\Debug\DialogGLDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\DialogGL.res
+.\Debug\Texture.obj>
+Creating command line "link.exe @C:\TEMP\RSP15D.tmp" 
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+DialogGL.cpp
+DialogGLDlg.cpp
+Texture.cpp
+Generating Code...
+Linking...
+
+
+
+DialogGL.exe - 0 error(s), 0 warning(s)

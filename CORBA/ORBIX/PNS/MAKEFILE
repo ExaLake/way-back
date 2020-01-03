@@ -1,0 +1,41 @@
+include ../orbix.mk
+
+all:	PNSServer FindPNS.o
+	@echo
+
+	@echo "If Orbix.cfg is not in /etc, make sure that the"
+	@echo "environment variable IT_CONFIG_PATH is set to point to the"
+	@echo "location of Orbix.cfg. "
+	@echo
+	@echo "Make sure that the orbix daemon (orbixd) is running."
+	@echo "use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/orbixd &"
+	@echo
+	@echo "Ensure that the server (\"PNSSrv\") is registered using"
+	@echo "putit, use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/putit -h`hostname` PNSSrv `pwd`/PNSServer"
+	@echo
+
+
+
+PNS_SERVER_OBJS	= ../idl/PNSS.o PNSData.o PNS_i.o Srv_Main.o
+
+PNSData.o: PNSData.cc
+	$(C++) $(C++FLAGS) -c  PNSData.cc
+
+PNS_i.o: PNS_i.cc
+	$(C++) $(C++FLAGS) -c PNS_i.cc
+
+Srv_Main.o: Srv_Main.cc
+	$(C++) $(C++FLAGS) -c Srv_Main.cc
+
+FindPNS.o: FindPNS.cc
+	$(C++) $(C++FLAGS) -c FindPNS.cc
+
+PNSServer: $(PNS_SERVER_OBJS)
+	$(C++) $(C++FLAGS) -o PNSServer $(LDFLAGS) $(PNS_SERVER_OBJS) $(ITSRV)  $(SYSLIBS)
+
+clean:
+	rm -rf *.o core PNSServer

@@ -1,0 +1,28 @@
+Update:
+Version 1.02
+ - put tootips for partial visible items.
+ - auto register xFloorWnd.ocx.
+ - first page has caption or not
+ - customizable separator
+ - set font for items.
+ - correct bug: height = 0 for list box, after unselecting item
+ - edit mode is open when user press key.
+Version 1.03
+ - color picker 
+Version 1.05
+ - ADOR.Recordset feature
+ - IObjectSafety implementation
+ - first column resizing
+ - animation in general page
+ - data picker
+ - BUG: growing up GDI memory available under Win95. Corrected
+ - BUG: when you try to close a form, and you have opened a ADOR recordset the system crach
+ - UNICODE accept
+ - Link button
+ - Return Button
+ - Font picker.
+     GetValue(nIndexPage,nIndexProperty,0) return for a font property a dispatch to IFont
+	 SetValue(nIndexPage,nIndexProperty,0) Set a IFont interface as default value
+     GetValue(nIndexPage,nIndexProperty,1) return for a font property color
+	 SetValue(nIndexPage,nIndexProperty,1) Set new color for this
+

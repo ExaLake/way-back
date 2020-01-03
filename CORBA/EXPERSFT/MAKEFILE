@@ -1,0 +1,15 @@
+all:
+	cd IDL; make all
+	cd PNS; make all
+	cd util; make all
+	cd POS; make all
+	cd store; make all
+	cd central; make all
+
+clean:
+	cd IDL; make clean
+	cd PNS; make clean
+	cd util; make clean
+	cd POS; make clean
+	cd store; make clean
+	cd central; make clean

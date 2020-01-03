@@ -1,0 +1,104 @@
+/*
+
+Copyright (C) 1996 by Iona Technologies. All rights reserved.
+
+Permission to use, copy, modify, and distribute this software for any
+teaching or instructional purpose and without fee is hereby granted,
+provided that the above copyright notice appear in all copies and that both
+that copyright notice and this permission notice appear in supporting
+documentation, and that the name of Iona Technologies Ltd. not be used in
+advertising or publicity pertaining to distribution of the software without
+specific, written prior permission.
+
+THIS SOFTWARE IS SOLD AS IS WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTY OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  Iona Technologies
+Ltd. assume no liability of any alleged or actual damages arising from the
+use of or the inability to use this software.
+
+*/
+
+#ifndef STORE_IDL
+#define STORE_IDL
+
+// include interface definition for Point Of Sale objects
+#include "POS.idl"
+
+module AStore {
+
+   enum ItemTypes {food, clothes, other};
+   typedef long AStoreId;
+
+   struct ItemInfo {
+      POS::Barcode      Item;
+      ItemTypes         Itemtype;
+      float             Itemcost;
+      string            Name;
+      long              Quantity;
+   };
+
+   // The barcodeNotFound exception indicates that the
+   // input barcode does not match to any known item.
+   exception BarcodeNotFound { POS::Barcode item; };
+
+   interface StoreAccess; // /forward reference
+
+   struct POSInfo {
+        POS::POSId   Id;
+        StoreAccess  StoreAccessReference;
+        float        TotalSales;
+        float        TotalTaxes;
+   };
+
+   typedef sequence <POSInfo> POSList;
+
+   interface Tax {
+
+      float CalculateTax(in float           TaxableAmount);
+
+      float FindTaxablePrice(in float       ItemPrice
+                            ,in ItemTypes   ItemType);
+
+   };
+
+   interface Store {
+
+        struct StoreTotals {
+           float     StoreTotal;
+           float     StoreTaxTotal;
+        };
+
+        readonly attribute AStoreId StoreId;
+
+        // The struct StoreTotals and this readonly attribute are used
+        // in place of a pair of float attributes to avoid data inconsistencies
+        // that would result from the following sequence of operations:
+        //
+        //    POS 1 invokes a method to read StoreTotal
+        //    POS 2 invokes the method UpdateStoreTotals
+        //    POS 1 invoikes a method to read the StoreTaxTotal
+        readonly attribute StoreTotals Totals;
+
+        StoreAccess Login(in POS::POSId Id);
+        void      GetPOSTotals(out POSList POSData);
+        void      UpdateStoreTotals(
+                      in POS::POSId Id
+                     ,in float      Price
+                     ,in float      Taxes);
+   };
+
+   interface StoreAccess {
+
+      // itemtaxprice is 0 or return value of FindTaxablePrice()
+      void      FindPrice(
+                      in  string Item
+                     ,in  long         Quantity
+                     ,out float        ItemPrice
+                     ,out float        ItemTaxPrice
+                     ,out ItemInfo     IInfo)
+         raises (BarcodeNotFound);
+
+   };
+
+};
+#endif

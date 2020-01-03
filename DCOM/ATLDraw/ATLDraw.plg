@@ -1,0 +1,49 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ATLDraw - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo".\Debug/ATLDraw.res" /d "_DEBUG" /d "_AFXDLL" "C:\Development\Code Samples\DCOM\ATLDraw\ATLDraw.rc"" 
+Creating temporary file "C:\TEMP\RSP1723.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "_WIN32_DCOM" /FR".\Debug/" /Fp".\Debug/ATLDraw.pch" /YX"preatldr.h" /Fo".\Debug/" /Fd".\Debug/" /FD /c 
+"C:\Development\Code Samples\DCOM\ATLDraw\ATLDDoc.cpp"
+"C:\Development\Code Samples\DCOM\ATLDraw\ATLDraw.cpp"
+"C:\Development\Code Samples\DCOM\ATLDraw\ATLDView.cpp"
+"C:\Development\Code Samples\DCOM\ATLDraw\MainFrm.cpp"
+"C:\Development\Code Samples\DCOM\ATLDraw\preatldr.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP1723.tmp" 
+Creating temporary file "C:\TEMP\RSP1724.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:".\Debug/ATLDraw.pdb" /debug /machine:I386 /out:".\Debug/ATLDraw.exe" 
+".\Debug\ATLDDoc.obj"
+".\Debug\ATLDraw.obj"
+".\Debug\ATLDView.obj"
+".\Debug\MainFrm.obj"
+".\Debug\preatldr.obj"
+".\Debug\ATLDraw.res"
+]
+Creating command line "link.exe @C:\TEMP\RSP1724.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+ATLDDoc.cpp
+ATLDraw.cpp
+c:\development\code samples\dcom\atldraw\atldview.h(14) : fatal error C1083: Cannot open include file: '..\DrawServ\DrawServ.h': No such file or directory
+ATLDView.cpp
+c:\development\code samples\dcom\atldraw\atldview.h(14) : fatal error C1083: Cannot open include file: '..\DrawServ\DrawServ.h': No such file or directory
+MainFrm.cpp
+preatldr.cpp
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+ATLDraw.exe - 2 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

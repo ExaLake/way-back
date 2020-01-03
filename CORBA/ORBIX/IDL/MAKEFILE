@@ -1,0 +1,53 @@
+include ../orbix.mk
+
+all:	idl objects
+
+OBJECTS = POSC.o POSS.o StoreC.o StoreS.o PNSS.o PNSC.o CentralS.o CentralC.o  PNSS.o PNSC.o
+
+
+StoreC.o: Store.hh
+	$(C++) -c $(C++FLAGS) StoreC.cc
+
+StoreS.o: Store.hh
+	$(C++) -c $(C++FLAGS) StoreS.cc
+
+
+CentralC.o: Central.hh
+	$(C++) -c $(C++FLAGS) CentralC.cc
+
+CentralS.o: Central.hh
+	$(C++) -c $(C++FLAGS) CentralS.cc
+
+
+PNSC.o: PNS.hh
+	$(C++) -c $(C++FLAGS) PNSC.cc
+
+PNSS.o: PNS.hh
+	$(C++) -c $(C++FLAGS) PNSS.cc
+
+
+POSC.o: POS.hh
+	$(C++) -c $(C++FLAGS) POSC.cc
+
+POSS.o: POS.hh
+	$(C++) -c $(C++FLAGS) POSS.cc
+
+Central.hh: Central.idl
+	$(IDL) $(IDLFLAGS) Central.idl
+
+Store.hh: Store.idl
+	$(IDL) $(IDLFLAGS) Store.idl
+
+PNS.hh: PNS.idl
+	$(IDL) $(IDLFLAGS) PNS.idl
+
+POS.hh: POS.idl
+	$(IDL) $(IDLFLAGS) POS.idl
+
+idl: POS.hh PNS.hh Store.hh Central.hh
+
+objects: $(OBJECTS)
+
+clean:
+	rm *.hh *C.cc *S.cc
+	rm *.o

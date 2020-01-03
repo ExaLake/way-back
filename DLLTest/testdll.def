@@ -1,0 +1,7 @@
+LIBRARY     TESTDLL.DLL
+
+EXPORTS
+    ??0testdll@@QAE@XZ             @1   
+    ??4testdll@@QAEAAV0@ABV0@@Z    @2   
+    ?getMember@testdll@@QAEHXZ     @3   
+    ?setMember@testdll@@QAEXH@Z    @4   

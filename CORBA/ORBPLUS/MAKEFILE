@@ -1,0 +1,28 @@
+#(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+#          
+#   To anyone who acknowledges that this file is provided "AS IS" 
+#   WITH NO EXPRESS OR IMPLIED WARRANTY:
+#   permission to use, copy, modify, and distribute this file for any 
+#   purpose is hereby granted without fee, provided that the above 
+#   copyright notice and this notice appear in all copies, and that 
+#   the name of Hewlett-Packard Company not be used in advertising or 
+#   publicity pertaining to distribution of the software without 
+#   specific, written prior permission.  Hewlett-Packard Company 
+#   makes no representations about the suitability of this software 
+#   for any purpose.
+
+
+all: 
+	cd ./Idl; make -f Makefile.idl
+	cd ./PNS; make -f Makefile.pns
+	cd ./Central; make -f Makefile.central
+	cd ./Store; make -f Makefile.store
+	cd ./POS; make -f Makefile.pos
+
+
+clean:
+	cd ./Idl; make -f Makefile.idl clean
+	cd ./PNS; make -f Makefile.pns clean
+	cd ./Central; make -f Makefile.central clean
+	cd ./Store; make -f Makefile.store clean
+	cd ./POS; make -f Makefile.pos clean

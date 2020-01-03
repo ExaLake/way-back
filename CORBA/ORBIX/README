@@ -1,0 +1,103 @@
+The Point of Sales Example in Orbix
+-----------------------------------
+
+This directory contains sourcecode for Orbix on Solaris. A version of
+this example for Microsoft NT (and possibly other systems), together with
+the code for the Visual Basic POS client are available in the directory 
+
+  ftp://ftp.iona.com/pub/OMG_Primer_Book/
+
+We have plans to extend the example, utilising more features of Orbix. You
+can find out the latest information on this and related information at
+
+  http://www.iona.com/www/OMG_Primer_Book/
+
+The Example Itself
+------------------
+
+This directory contains the source for the point of sales application.
+
+You must start by renaming the files to sensible names (the floppy disk
+contains names with all capitals, which is not too pretty).  Simply run
+the following command to rename the files:
+
+	$ make -f MAKEFILE rename
+
+Subdirectories
+--------------
+
+Subdirectories Central, Store, POS and PNS contain the C++ files for the
+servers and clients of the application. The subdirectory IDL contains the
+standard IDL files for all interfaces.
+
+Compiling the Code
+------------------
+
+To compile the example, edit the file orbix.mk filling in the source directory
+for Orbix and the C++ complier path.
+
+After that, you can build the complete application by typing
+
+	$ make all
+	
+in this directory.
+
+Setting up and Registering the Servers
+--------------------------------------
+
+* first set up the Orbix environment (IT_CONFIG_PATH etc) 
+
+* run the orbix daemon from the working directory containing the data
+  file depot.dat
+	  
+	$ orbixd 
+
+* next, register the servers of the system (from this directory)
+
+  This can be done with
+
+	$ make reg
+
+  or if you want to do it by hand you could type
+
+	$ putit CentralSrv "$PWD/Central/CentralServer"
+	$ putit StoreSrv "$PWD/Store/StoreServer <StoreNr>  <Markup>"
+	$ putit OutputSrv "$PWD/POS/OutputServer <POSNr> "
+	$ putit PNSSrv  "$PWD/PNSServer"
+
+Running the Example
+-------------------
+
+* we want to run the clients in the server
+
+  This can be done with
+
+	$ make run
+
+  which runs the Launcher client, which launches the servers in the correct
+  order so that the PNS knows about them.
+
+  It then runs the POS client.
+ 
+  Or you can do it explicitly, as follows
+
+	$ Launcher/Launcher
+
+	$ POS/POSClient <StoreNr> <POSNr> 
+
+but make sure that the file PNS.dat, which contains the reference
+for the pseudo namingservice is in the directory you run the client
+from.
+
+That's it, you're done!
+
+Barcodes
+--------
+You'll probably want to know what the valid barcodes are - so here's the
+contents of depot.dat - the barcodes are in the first column.
+
+423552 Pencil 2  2.35 OTHER
+923988 Persil 1 12.34 CLOTHES
+234234 Pen    0  8.31 OTHER
+789789 Peas   1  7.35 FOOD
+102345 Pasta  2 12.38 FOOD

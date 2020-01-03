@@ -1,0 +1,168 @@
+/************************************
+  REVISION LOG ENTRY
+  Revision By: Mihai Filimon
+  Revised on 10/13/98 2:27:40 PM
+  Comments: XPropertiesWnd.odl : type library source for ActiveX Control project.
+ ************************************/
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (XPropertiesWnd.tlb) that will become a resource in
+// XPropertiesWnd.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(7B914A58-6271-11D2-86B8-0040055C08D9), version(1.0),
+  helpfile("XPropertiesWnd.hlp"),
+  helpstring("XPropertiesWnd ActiveX Control module"),
+  control ]
+library XPROPERTIESWNDLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CXPropertiesWndCtrl
+
+	[ uuid(7B914A59-6271-11D2-86B8-0040055C08D9),
+	  helpstring("Dispatch interface for XPropertiesWnd Control"), hidden ]
+	dispinterface _DXPropertiesWnd
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CXPropertiesWndCtrl)
+			[id(DISPID_BACKCOLOR), bindable, requestedit] OLE_COLOR BackColor;
+			[id(1)] BSTR PagesAndItems;
+			[id(2)] boolean AutoResizingColumns;
+			[id(3)] boolean SignEnableDisable;
+			[id(4)] boolean ToolTips;
+			[id(5)] boolean FirstPageHasCaption;
+			[id(9)] IFontDisp* ItemFont;
+			[id(6)] boolean AsFloor;
+			[id(DISPID_FONT), bindable] IFontDisp* Font;
+			[id(7)] boolean ResizeFirstColumn;
+			[id(8)] boolean Animation;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CXPropertiesWndCtrl)
+			[id(10)] long GetPagesCount();
+			[id(11)] short AddPage(BSTR lpszPageName);
+			[id(12)] boolean DeletePage(short nIndexPage);
+			[id(13)] BSTR GetPageName(short nIndexPage);
+			[id(14)] short GetPage(BSTR lpszPageName);
+			[id(15)] void ActivatePage(short nIndexPage);
+			[id(16)] short InsertProperty(short nIndexPage, short nIndexProperty, BSTR lpszPropertyName, BSTR lpszPropertyAs, short lpszProperyType);
+			[id(17)] boolean DeleteProperty(short nIndexPage, short nIndexProperty);
+			[id(18)] BSTR GetPropertyName(short nIndexPage, short nIndexProperty);
+			[id(19)] short GetPropertyType(short nIndexPage, short nIndexProperty);
+			[id(20)] void SetPropertyType(short nIndexPage, short nIndexProperty, short nNewType);
+			[id(21)] BSTR GetPropertyAs(short nIndexPage, short nIndexProperty);
+			[id(22)] boolean IsProperty(short nIndexPage, short nIndexProperty);
+			[id(23)] long GetIDListCtrl(short nIndexPage);
+			[id(24)] short GetActivePage();
+			[id(25)] IUnknown* GetxFloorWnd();
+			[id(26)] boolean GetDefaultValue(short nIndexPage, short nIndexProperty, BSTR* sPropertyValue);
+			[id(27)] boolean SetDefaultValue(short nIndexPage, short nIndexProperty, BSTR lpszDefaultvalue);
+			[id(28)] short GetPropertyCount(short nIndexPage);
+			[id(29)] void SetPropertyName(short nIndexPage, short nIndexProperty, BSTR lpszProperyName);
+			[id(30)] boolean GetPropertyIndex(BSTR lpszPropertyName, short* nIndexPage, short* nIndexProperty);
+			[id(31)] boolean SetDefaultValueByName(BSTR lpszPropertyName, BSTR lpszPropertyValue);
+			[id(32)] BSTR GetDefaultValueByName(BSTR lpszPropertyName);
+			[id(33)] short GetActiveProperty(short* nIndexPage);
+			[id(34)] boolean SetActiveProperty(short nIndexPage, short IndexProperty);
+			[id(35)] boolean SetActivePropertyByName(BSTR lpszPropertyName);
+			[id(36)] boolean DeletePropertyByName(BSTR lpszPropertyName);
+			[id(37)] short AddProperty(BSTR lpszPropertyName, BSTR lpszPropertyAs, short nPropertyType);
+			[id(38)] void Init();
+			[id(43), propget] long ColumnKey(short nIndexPage, short nIndexProperty);
+			[id(43), propput] void ColumnKey(short nIndexPage, short nIndexProperty, long nNewValue);
+			[id(44), propget] long ColumnWidth(short nIndexPage, short nIndexProperty, long nColumn);
+			[id(44), propput] void ColumnWidth(short nIndexPage, short nIndexProperty, long nColumn, long nNewValue);
+			[id(45), propget] BSTR ColumnName(short nIndexPage, short nIndexProperty, short nColumn);
+			[id(45), propput] void ColumnName(short nIndexPage, short nIndexProperty, short nColumn, BSTR lpszNewValue);
+			[id(46), propget] boolean ColumnHeader(short nIndexPage, short nIndexProperty);
+			[id(46), propput] void ColumnHeader(short nIndexPage, short nIndexProperty, boolean bNewValue);
+			[id(47), propget] double DropDownWidth(short nIndexPage, short nIndexProperty);
+			[id(47), propput] void DropDownWidth(short nIndexPage, short nIndexProperty, double newValue);
+			[id(48), propget] long DropDownHeight(short nIndexPage, short nIndexProperty);
+			[id(48), propput] void DropDownHeight(short nIndexPage, short nIndexProperty, long nNewValue);
+			[id(39)] void RefreshProperty(short nIndexPage, short nIndexProperty);
+			[id(40)] VARIANT GetValue(short nIndexPage, short nIndexProperty, long nColumn);
+			[id(41)] VARIANT GetValueByName(BSTR lpszPropertyName, long nColumn);
+			[id(49), propget] BSTR ColumnKeyByName(short nIndexPage, short nIndexProperty);
+			[id(49), propput] void ColumnKeyByName(short nIndexPage, short nIndexProperty, BSTR lpszNewValue);
+			[id(42)] void SetValue(short nIndexPage, short nIndexProperty, VARIANT vValue, short nColumn);
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CXPropertiesWndCtrl
+
+	[ uuid(7B914A5A-6271-11D2-86B8-0040055C08D9),
+	  helpstring("Event interface for XPropertiesWnd Control") ]
+	dispinterface _DXPropertiesWndEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CXPropertiesWndCtrl)
+			[id(1)] void SelectItem(short nIndexPage, short nIndexItem);
+			[id(2)] void SelectPage(short nIndex);
+			[id(3)] void UnselectItem(short nIndexPage, short nIndexItem);
+			[id(4)] void PropertyChanging(short nIndexPage, short nIndexProperty);
+			[id(5)] void PropertyChanged(short nIndexPage, short nIndexProperty, boolean bUpdate);
+			[id(6)] void ButtonClick(short nIndexPage, short nIndexProperty);
+			[id(7)] void LoadItems(short nIndexPage, short nIndexProperty, BSTR* lpszItems);
+			[id(8)] void SetObject(long nIndexPage, long nIndexProperty, IDispatch** pObject);
+			[id(9)] void Delete(short nIndexPage, short nIndexProperty);
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CXPropertiesWndCtrl
+
+	[ uuid(7B914A5B-6271-11D2-86B8-0040055C08D9),
+	  helpstring("XPropertiesWnd Control"), control ]
+	coclass XPropertiesWnd
+	{
+		[default] dispinterface _DXPropertiesWnd;
+		[default, source] dispinterface _DXPropertiesWndEvents;
+	};
+
+
+
+	//  Primary dispatch interface for CItemToolTipCtrl
+	
+	[ uuid(7C49E333-68BA-11D2-86C6-0040055C08D9) ]
+	dispinterface IItemToolTipCtrl
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CItemToolTipCtrl)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CItemToolTipCtrl)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CItemToolTipCtrl
+
+	[ uuid(7C49E335-68BA-11D2-86C6-0040055C08D9) ]
+	coclass ItemToolTipCtrl
+	{
+		[default] dispinterface IItemToolTipCtrl;
+	};
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

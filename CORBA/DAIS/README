@@ -1,0 +1,82 @@
+This directory contains all the code necessary to build the primer POS
+application for dais. On the diskette supplied with the book, the
+filenames are constrained to the MSDOS 8.3 format, in uppercase. The
+mapping of MSDOS names to to the names required by the UNIX build
+system is shown at the end of this README.
+
+Among the files provided is a Bourne shell script, "build", which
+builds all the executables. It may require editing dependent on the
+location of your DAIS installation and where you have placed the IDL
+for the example.
+
+There is also a script, "run", which facilitates running up an example
+usage of the application, with each capsule being started in its own
+xterm. You may also run up the application by invoking the executables
+with appropriate arguments from the command line. As stated in the
+book, because of the simplicity of the example the sequencing of
+startup is important. In order to start correctly, the executablers
+should be started in the following order, with a pause between each to
+allow time for initialisation to complete:
+
+	central office
+	output media
+	store
+	pos
+
+The POS will then require user input.
+
+Please note that should the accompanying code or build scripts become
+obsolete due to improvements in the DAIS product set, an updated
+version will be made available under:
+
+	http://www.icl.com/dais
+
+Object Software Laboratories, ICL 4jan96
+
+
+
+MSDOS to UNIX Filename Mapping
+==============================
+
+This mapping shows the UNIX filenames from which the MSDOS equivalents
+have been derived. The supplied UNIX build script assumes the
+filenames are in the original UNIX form rather than the form that
+files have been supplied on the diskette.
+
+The mapping is shown in a form which should be easy to edit to create
+a script to convert the names appropriately once the files have been
+transferred to a UNIX system (prefix each line with "mv "). This has
+not been provided as a ready made script because the mechanism used to
+transfer the files to the UNIX system may well modify the filenames in
+the process and will vary from system to system.
+
+A compressed tar file is available on the ICL web site (above) which
+contains files with names in the UNIX format. This tar file will also
+be kept up to date with changes in the DAIS product set. 
+
+MSDOS             UNIX
+-----             ----
+
+README            README            
+BUILD             build             
+CENTRAL.C         central.c         
+COMMON.H          common.h          
+DB.H              db.h              
+DEPOT.DAT         depot.dat         
+DEPOT_MA.C        depot_main.c      
+IM.C              im.c              
+LINEAR.C          linear.c          
+MISC.C            misc.c            
+MISC.H            misc.h            
+OM.C              om.c              
+OM_MAIN.C         om_main.c         
+PNAME_MA.C        pname_main.c      
+PNAMESVC.C        pnamesvc.c        
+POS_MAIN.C        pos_main.c        
+POSTERMI.C        posterminal.c     
+RUN               run               
+STORE.C           store.c           
+STORE_AC.C        store_access.c    
+STORE_MA.C        store_main.c      
+TAX.C             tax.c             
+

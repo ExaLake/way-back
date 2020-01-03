@@ -1,0 +1,28 @@
+SOURCE.C   = POS_Ter.C \
+             POS_IM.C \
+             POS_OM.C \
+             Srv_Main.C \
+             POSClt.C 
+
+APPL1 = outServer
+APPL2 = POSclt
+APP1OBJ = POS_Ter.o POS_OM.o POS_IM.o Srv_Main.o
+APP2OBJ = POS_Ter.o POS_OM.o POS_IM.o POSClt.o
+INCLUDE = -I. -I../IDL -I../central -I../util -I$(PBHOME)/include
+LIBRARY =  -L../IDL -L$(PBHOME)/lib -lstubs -lunixsvc -lcorba -lpbroker
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJ = ../util/FindPNS.o
+
+include $(PBHOME)/make/make.cfg
+
+all : $(APPL1) $(APPL2)
+
+$(APPL1): $(OBJECTS)
+	$(CC) -g -o $(APPL1) $(APP1OBJ) $(OTHEROBJ) $(LIBRARY) -lnsl -lsocket
+
+$(APPL2): $(OBJECTS)
+	$(CC) -g -o $(APPL2) $(APP2OBJ) $(OTHEROBJ) $(LIBRARY) -lnsl -lsocket
+
+clean:
+	rm -f *.o ${DEPFILE} $(APPL1) $(APPL2) core .make.state .nse_depinfo
+

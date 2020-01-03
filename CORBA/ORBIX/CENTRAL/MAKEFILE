@@ -1,0 +1,40 @@
+include ../orbix.mk
+
+all:	CentralServer
+	@echo
+
+	@echo "If Orbix.cfg is not in /etc, make sure that the"
+	@echo "environment variable IT_CONFIG_PATH is set to point to the"
+	@echo "location of Orbix.cfg. "
+	@echo
+	@echo "Make sure that the orbix daemon (orbixd) is running."
+	@echo "use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/orbixd &"
+	@echo
+	@echo "Ensure that the server (\"CentralSrv\") is registered using"
+	@echo "putit, use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/putit -h`hostname` CentralSrv \"`pwd`/CentralServer\""
+	@echo
+
+
+
+Depot_SERVER_OBJS = ../idl/StoreC.o ../idl/PNSC.o ../idl/CentralS.o \
+		    ../PNS/FindPNS.o Depot_i.o Srv_Main.o DepotData.o
+
+Depot_i.o: Depot_i.cc
+	$(C++) $(C++FLAGS) -c Depot_i.cc
+
+Srv_Main.o: Srv_Main.cc
+	$(C++) $(C++FLAGS) -c Srv_Main.cc
+
+DepotData.o: DepotData.cc
+	$(C++) $(C++FLAGS) -c DepotData.cc
+
+CentralServer: $(Depot_SERVER_OBJS)
+	$(C++) $(C++FLAGS) -o CentralServer $(Depot_SERVER_OBJS) $(LDFLAGS) $(ITSRV) \
+	$(SYSLIBS)
+
+clean:
+	rm -rf core *.o CentralServer

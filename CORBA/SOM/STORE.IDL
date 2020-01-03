@@ -1,0 +1,178 @@
+/*
+ *   (C) COPYRIGHT International Business Machines Corp. 1995
+ *   All Rights Reserved
+ *   Licensed Materials - Property of IBM
+ *   US Government Users Restricted Rights - Use, duplication or
+ *   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ *
+ *   DISCLAIMER OF WARRANTIES.
+ *   The following [enclosed] code is sample code created by IBM
+ *   Corporation. This sample code is not part of any standard or IBM
+ *   product and is provided to you solely for the purpose of assisting
+ *   you in the development of your applications.  The code is provided
+ *   "AS IS". IBM MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+ *   NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ *   FOR A PARTICULAR PURPOSE, REGARDING THE FUNCTION OR PERFORMANCE OF
+ *   THIS CODE.  IBM shall not be liable for any damages arising out of
+ *   your use of the sample code, even if they have been advised of the
+ *   possibility of such damages.
+ *
+ *   DISTRIBUTION.
+ *   This sample code can be freely distributed, copied, altered, and
+ *   incorporated into other software, provided that it bears the above
+ *   Copyright notice and DISCLAIMER intact.
+ */
+
+#ifndef _STORE_IDL
+#define _STORE_IDL
+
+// File store.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in a chain food store
+// Point of Sale (POS) System.
+//
+
+#ifdef __SOMIDL__
+#include <somdserv.idl>
+#include <somobj.idl>
+#endif
+
+// include interface definition for Point Of Sale objects
+
+#include "pos.idl"
+
+module AStore {
+
+   enum ItemTypes {food, clothes, other};
+   typedef long AStoreId;
+
+
+   struct ItemInfo {
+     POS::Barcode      Item;
+     ItemTypes         Itemtype;
+     float             Itemcost;
+     string            Name;
+     long              Quantity;
+   };
+
+   // The barcodeNotFound exception indicates that the 
+   // input barcode does not match to any known item.
+   exception BarcodeNotFound { POS::Barcode item; };
+
+   interface StoreAccess; // /forward reference 
+
+   struct POSInfo {
+	POS::POSId  Id;
+        StoreAccess StoreAccessReference;
+	float       TotalSales;
+	float       TotalTaxes;
+   };
+
+   typedef sequence <POSInfo> POSList;
+
+#ifdef __SOMIDL__
+   interface Tax : SOMObject {
+#else
+   interface Tax {
+#endif
+
+      float CalculateTax(in float             TaxableAmount);
+      float FindTaxablePrice(in float         ItemPrice
+                            ,in ItemTypes     ItemType);
+
+#ifdef __SOMIDL__
+	implementation {
+		releaseorder:	CalculateTax,
+				FindTaxablePrice;
+		somToken	ostate;
+		override:	somDefaultInit, somDestruct;
+		dllname = "dobjs.dll";
+
+
+	};
+#endif   
+   };
+
+#ifdef __SOMIDL__
+   interface Store : SOMDServer {
+#else
+   interface Store {
+#endif	
+	struct StoreTotals {
+	   float     StoreTotal;
+	   float     StoreTaxTotal;
+	};
+
+	readonly attribute AStoreId StoreId;
+
+	// The struct StoreTotals ant his readonly attribute are used
+	// in place of a pair of float attributes to avoid data inconsistencies
+	// that would result from the following sequence of operations:
+	//
+	// 	POS 1 invokes a method to read store_total
+	//      POS 2 invokes the method update_store_totals
+	//      POS 1 invokes a method to read the store_tax_total
+
+	readonly attribute StoreTotals Totals;
+
+	StoreAccess  Login(in POS::POSId Id);
+	void      GetPOSTotals(out POSList POSData);
+        void      UpdateStoreTotals(
+		      in POS::POSId Id
+                     ,in float      Price
+                     ,in float      Taxes);
+#ifdef __SOMIDL__
+	implementation {
+		releaseorder: 	Login, GetPOSTotals, UpdateStoreTotals,
+				_get_StoreId, _get_Totals;
+		override:	somDefaultInit, somDestruct;
+		dllname = "dobjs.dll";
+
+
+// instance data
+	        somToken ostate;
+	};
+#endif
+
+   };
+
+#ifdef __SOMIDL__
+   interface StoreAccess : SOMObject {
+#else
+   interface StoreAccess {
+#endif
+
+      // itemtaxprice is 0 or return value of FindTaxablePrice()
+      void      FindPrice(
+                      in  POS::Barcode Item
+                     ,in  long         Quantity
+                     ,out float        ItemPrice
+                     ,out float        ItemTaxPrice
+	             ,out ItemInfo     IInfo)
+         raises (BarcodeNotFound);
+
+#ifdef __SOMIDL__
+
+	/* constructor for creating StoreAccess instances with initialization parameters */
+	void storeInit( 		      
+                      inout somInitCtrl ctrl  
+		     ,in SOMObject taxref
+                     ,in SOMObject depotref
+                     ,in float markup
+		     ,in long storeid);
+
+	implementation {
+		
+		releaseorder: 	FindPrice, storeInit;
+		storeInit: init;
+		override: somDefaultInit, somDestruct;
+		somToken  ostate;
+		dllname = "dobjs.dll";
+	};
+#endif
+	
+   };
+
+};
+#endif

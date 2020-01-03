@@ -1,0 +1,38 @@
+include ../orbix.mk
+
+all:	StoreServer
+	@echo
+
+	@echo "If Orbix.cfg is not in /etc, make sure that the"
+	@echo "environment variable IT_CONFIG_PATH is set to point to the"
+	@echo "location of Orbix.cfg. "
+	@echo
+	@echo "Make sure that the orbix daemon (orbixd) is running."
+	@echo "use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/orbixd &"
+	@echo
+	@echo "Ensure that the server (\"StoreSrv\") is registered using"
+	@echo "putit, use a command line something like this:"
+	@echo
+	@echo "    $(ORBIX_BINDIR)/putit -h`hostname` StoreSrv \"`pwd`/StoreServer <StoreNr> <Markup>  \""
+	@echo
+
+
+Store_SERVER_OBJS	= ../idl/StoreS.o ../idl/CentralC.o ../idl/PNSC.o \
+                          ../PNS/FindPNS.o Store_i.o Srv_Main.o
+
+Store_i.o: Store_i.cc
+	$(C++) $(C++FLAGS) -c Store_i.cc
+
+Srv_Main.o: Srv_Main.cc
+	$(C++) $(C++FLAGS) -c Srv_Main.cc
+
+	
+	
+StoreServer: $(Store_SERVER_OBJS)
+	$(C++) $(C++FLAGS) -o StoreServer $(Store_SERVER_OBJS) $(LDFLAGS) $(ITSRV) \
+	$(SYSLIBS)
+
+clean:
+	rm -rf core *.o StoreServer 

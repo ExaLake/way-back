@@ -1,0 +1,13 @@
+somdd&
+sleep 5
+somdsvr -a pnssvr&
+sleep 5
+somdsvr -a centralsvr&
+sleep 5
+somdsvr -a outputsvr_1&
+sleep 5
+somdsvr -a outputsvr_2&
+sleep 5
+somdsvr -a storesvr_1&
+
+

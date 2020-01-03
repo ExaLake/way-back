@@ -1,0 +1,458 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: XFloorWnd - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "midl.exe /nologo /D "NDEBUG" /tlb "Release/XFloorWnd.tlb" /mktyplib203 /o "NUL" /win32 "C:\Development\MyProjects\XFloorWnd\XFloorWnd.odl""
+Creating command line "rc.exe /l 0x409 /fo"Release/XFloorWnd.res" /i "Release" /d "NDEBUG" "C:\Development\MyProjects\XFloorWnd\XFloorWnd.rc"" 
+Creating temporary file "C:\TEMP\RSP31F4.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_WINDLL" /FR"Release/" /Fp"Release/XFloorWnd.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Development\MyProjects\XFloorWnd\FloorLabeObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\FloorObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\FloorPageObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\PagesListCtrl.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelComboBox.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelEdit.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelList.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWnd.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWndCtl.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWndPpg.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP31F4.tmp" 
+Creating temporary file "C:\TEMP\RSP31F5.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_WINDLL" /FR"Release/" /Fp"Release/XFloorWnd.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Development\MyProjects\XFloorWnd\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP31F5.tmp" 
+Creating temporary file "C:\TEMP\RSP31F6.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:no /pdb:"Release/XFloorWnd.pdb" /machine:I386 /def:".\XFloorWnd.def" /out:"Release/XFloorWnd.ocx" /implib:"Release/XFloorWnd.lib" 
+.\Release\FloorLabeObject.obj
+.\Release\FloorObject.obj
+.\Release\FloorPageObject.obj
+.\Release\PagesListCtrl.obj
+.\Release\StdAfx.obj
+.\Release\TLabelComboBox.obj
+.\Release\TLabelEdit.obj
+.\Release\TLabelList.obj
+.\Release\XFloorWnd.obj
+.\Release\XFloorWndCtl.obj
+.\Release\XFloorWndPpg.obj
+.\Release\XFloorWnd.res
+]
+Creating command line "link.exe @C:\TEMP\RSP31F6.tmp"
+Creating temporary file "C:\TEMP\RSP31F7.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\Release\XFloorWnd.ocx"
+echo regsvr32 exec. time > ".\Release\regsvr32.trg"
+]
+Creating command line "C:\TEMP\RSP31F7.bat"
+Creating Type Library...
+XFloorWnd.odl
+oaidl.idl
+objidl.idl
+unknwn.idl
+wtypes.idl
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+FloorLabeObject.cpp
+FloorObject.cpp
+FloorPageObject.cpp
+PagesListCtrl.cpp
+TLabelComboBox.cpp
+TLabelEdit.cpp
+TLabelList.cpp
+XFloorWnd.cpp
+XFloorWndCtl.cpp
+XFloorWndPpg.cpp
+Generating Code...
+Linking...
+   Creating library Release/XFloorWnd.lib and object Release/XFloorWnd.exp
+LINK : warning LNK4089: all references to "urlmon.dll" discarded by /OPT:REF
+<h3>Output Window</h3>
+Registering ActiveX Control...
+RegSvr32: LoadLibrary(".\Release\XFloorWnd.ocx") failed.
+GetLastError returns 0x000003e6.
+
+
+
+
+<h3>Results</h3>
+XFloorWnd.ocx - 0 error(s), 1 warning(s)
+<h3>
+--------------------Configuration: XFloorWnd - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "midl.exe /nologo /D "_DEBUG" /tlb "Debug/XFloorWnd.tlb" /mktyplib203 /o "NUL" /win32 "C:\Development\MyProjects\XFloorWnd\XFloorWnd.odl""
+Creating command line "rc.exe /l 0x409 /fo"Debug/XFloorWnd.res" /i "Debug" /d "_DEBUG" "C:\Development\MyProjects\XFloorWnd\XFloorWnd.rc"" 
+Creating temporary file "C:\TEMP\RSP3200.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_WINDLL" /FR"Debug/" /Fp"Debug/XFloorWnd.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\Development\MyProjects\XFloorWnd\FloorLabeObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\FloorObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\FloorPageObject.cpp"
+"C:\Development\MyProjects\XFloorWnd\PagesListCtrl.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelComboBox.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelEdit.cpp"
+"C:\Development\MyProjects\XFloorWnd\TLabelList.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWnd.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWndCtl.cpp"
+"C:\Development\MyProjects\XFloorWnd\XFloorWndPpg.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP3200.tmp" 
+Creating temporary file "C:\TEMP\RSP3201.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_USRDLL" /D "_WINDLL" /FR"Debug/" /Fp"Debug/XFloorWnd.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\Development\MyProjects\XFloorWnd\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP3201.tmp" 
+Creating temporary file "C:\TEMP\RSP3202.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:yes /pdb:"Debug/XFloorWnd.pdb" /debug /machine:I386 /def:".\XFloorWnd.def" /out:"Debug/XFloorWnd.ocx" /implib:"Debug/XFloorWnd.lib" /pdbtype:sept 
+.\Debug\FloorLabeObject.obj
+.\Debug\FloorObject.obj
+.\Debug\FloorPageObject.obj
+.\Debug\PagesListCtrl.obj
+.\Debug\StdAfx.obj
+.\Debug\TLabelComboBox.obj
+.\Debug\TLabelEdit.obj
+.\Debug\TLabelList.obj
+.\Debug\XFloorWnd.obj
+.\Debug\XFloorWndCtl.obj
+.\Debug\XFloorWndPpg.obj
+.\Debug\XFloorWnd.res
+]
+Creating command line "link.exe @C:\TEMP\RSP3202.tmp"
+Creating temporary file "C:\TEMP\RSP3203.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\Debug\XFloorWnd.ocx"
+echo regsvr32 exec. time > ".\Debug\regsvr32.trg"
+]
+Creating command line "C:\TEMP\RSP3203.bat"
+Creating Type Library...
+XFloorWnd.odl
+oaidl.idl
+objidl.idl
+unknwn.idl
+wtypes.idl
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+FloorLabeObject.cpp
+FloorObject.cpp
+FloorPageObject.cpp
+PagesListCtrl.cpp
+TLabelComboBox.cpp
+TLabelEdit.cpp
+TLabelList.cpp
+XFloorWnd.cpp
+XFloorWndCtl.cpp
+XFloorWndPpg.cpp
+Generating Code...
+Linking...
+   Creating library Debug/XFloorWnd.lib and object Debug/XFloorWnd.exp
+<h3>Output Window</h3>
+Registering ActiveX Control...
+RegSvr32: DllRegisterServer in .\Debug\XFloorWnd.ocx succeeded.
+
+
+
+
+<h3>Results</h3>
+XFloorWnd.ocx - 0 error(s), 0 warning(s)
+<h3>
+--------------------Configuration: XPropertiesWnd - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "midl.exe /nologo /D "NDEBUG" /tlb "Release/XPropertiesWnd.tlb" /mktyplib203 /o "NUL" /win32 "C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.odl""
+Creating command line "rc.exe /l 0x409 /fo"Release/XPropertiesWnd.res" /i "Release" /d "NDEBUG" "C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.rc"" 
+Creating temporary file "C:\TEMP\RSP320C.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "OEM_RESOURCE" /D "_WINDLL" /Fp"Release/XPropertiesWnd.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Development\MyProjects\XPropertiesWnd\ADORMultiColumnComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\adorrecset.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\AsControls.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColorHeaderCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColourPicker.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColourPopup.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ControlsWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DateComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DropEdit.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DropListBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\font.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\HighLightButton.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ItemToolTipCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ModalEdit.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\MultiColumnComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\PageListCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\PageListCtrlDesign.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ReflectShellTree.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\rttim.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ShellTree.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XDesignPopupMenu.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XFloorPropertiesWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XFloorPropertiesWndDesign.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\xfloorwnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XGeneralWndPropPage.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWndCtl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWndPpg.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP320C.tmp" 
+Creating temporary file "C:\TEMP\RSP320D.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "OEM_RESOURCE" /D "_WINDLL" /Fp"Release/XPropertiesWnd.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\Development\MyProjects\XPropertiesWnd\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP320D.tmp" 
+Creating temporary file "C:\TEMP\RSP320E.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:no /pdb:"Release/XPropertiesWnd.pdb" /machine:I386 /def:".\XPropertiesWnd.def" /out:"Release/XPropertiesWnd.ocx" /implib:"Release/XPropertiesWnd.lib" 
+.\Release\ADORMultiColumnComboBox.obj
+.\Release\adorrecset.obj
+.\Release\AsControls.obj
+.\Release\ColorHeaderCtrl.obj
+.\Release\ColourPicker.obj
+.\Release\ColourPopup.obj
+.\Release\ControlsWnd.obj
+.\Release\DateComboBox.obj
+.\Release\DropEdit.obj
+.\Release\DropListBox.obj
+.\Release\font.obj
+.\Release\HighLightButton.obj
+.\Release\ItemToolTipCtrl.obj
+.\Release\ModalEdit.obj
+.\Release\MultiColumnComboBox.obj
+.\Release\PageListCtrl.obj
+.\Release\PageListCtrlDesign.obj
+.\Release\ReflectShellTree.obj
+.\Release\rttim.obj
+.\Release\ShellTree.obj
+.\Release\StdAfx.obj
+.\Release\XDesignPopupMenu.obj
+.\Release\XFloorPropertiesWnd.obj
+.\Release\XFloorPropertiesWndDesign.obj
+.\Release\xfloorwnd.obj
+.\Release\XGeneralWndPropPage.obj
+.\Release\XPropertiesWnd.obj
+.\Release\XPropertiesWndCtl.obj
+.\Release\XPropertiesWndPpg.obj
+.\Release\XPropertiesWnd.res
+]
+Creating command line "link.exe @C:\TEMP\RSP320E.tmp"
+Creating temporary file "C:\TEMP\RSP320F.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\Release\XPropertiesWnd.ocx"
+echo regsvr32 exec. time > ".\Release\regsvr32.trg"
+]
+Creating command line "C:\TEMP\RSP320F.bat"
+Creating Type Library...
+XPropertiesWnd.odl
+oaidl.idl
+objidl.idl
+unknwn.idl
+wtypes.idl
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ADORMultiColumnComboBox.cpp
+adorrecset.cpp
+AsControls.cpp
+ColorHeaderCtrl.cpp
+ColourPicker.cpp
+ColourPopup.cpp
+ControlsWnd.cpp
+DateComboBox.cpp
+DropEdit.cpp
+DropListBox.cpp
+font.cpp
+HighLightButton.cpp
+ItemToolTipCtrl.cpp
+ModalEdit.cpp
+MultiColumnComboBox.cpp
+PageListCtrl.cpp
+PageListCtrlDesign.cpp
+ReflectShellTree.cpp
+rttim.cpp
+ShellTree.cpp
+Generating Code...
+Compiling...
+XDesignPopupMenu.cpp
+XFloorPropertiesWnd.cpp
+XFloorPropertiesWndDesign.cpp
+xfloorwnd.cpp
+XGeneralWndPropPage.cpp
+XPropertiesWnd.cpp
+XPropertiesWndCtl.cpp
+XPropertiesWndPpg.cpp
+Generating Code...
+Linking...
+   Creating library Release/XPropertiesWnd.lib and object Release/XPropertiesWnd.exp
+LINK : warning LNK4089: all references to "urlmon.dll" discarded by /OPT:REF
+<h3>Output Window</h3>
+Registering ActiveX Control...
+RegSvr32: DllRegisterServer in .\Release\XPropertiesWnd.ocx succeeded.
+
+
+
+
+<h3>Results</h3>
+XPropertiesWnd.ocx - 0 error(s), 1 warning(s)
+<h3>
+--------------------Configuration: XPropertiesWnd - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "midl.exe /nologo /D "_DEBUG" /tlb "Debug/XPropertiesWnd.tlb" /mktyplib203 /o "NUL" /win32 "C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.odl""
+Creating command line "rc.exe /l 0x409 /fo"Debug/XPropertiesWnd.res" /i "Debug" /d "_DEBUG" "C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.rc"" 
+Creating temporary file "C:\TEMP\RSP3218.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "OEMRESOURCE" /D "_WINDLL" /FR"Debug/" /Fp"Debug/XPropertiesWnd.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\Development\MyProjects\XPropertiesWnd\ADORMultiColumnComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\adorrecset.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\AsControls.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColorHeaderCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColourPicker.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ColourPopup.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ControlsWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DateComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DropEdit.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\DropListBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\font.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\HighLightButton.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ItemToolTipCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ModalEdit.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\MultiColumnComboBox.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\PageListCtrl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\PageListCtrlDesign.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ReflectShellTree.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\rttim.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\ShellTree.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XDesignPopupMenu.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XFloorPropertiesWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XFloorPropertiesWndDesign.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\xfloorwnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XGeneralWndPropPage.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWnd.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWndCtl.cpp"
+"C:\Development\MyProjects\XPropertiesWnd\XPropertiesWndPpg.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP3218.tmp" 
+Creating temporary file "C:\TEMP\RSP3219.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_USRDLL" /D "OEMRESOURCE" /D "_WINDLL" /FR"Debug/" /Fp"Debug/XPropertiesWnd.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\Development\MyProjects\XPropertiesWnd\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP3219.tmp" 
+Creating temporary file "C:\TEMP\RSP321A.tmp" with contents
+[
+/nologo /subsystem:windows /dll /incremental:yes /pdb:"Debug/XPropertiesWnd.pdb" /debug /machine:I386 /def:".\XPropertiesWnd.def" /out:"Debug/XPropertiesWnd.ocx" /implib:"Debug/XPropertiesWnd.lib" /pdbtype:sept 
+.\Debug\ADORMultiColumnComboBox.obj
+.\Debug\adorrecset.obj
+.\Debug\AsControls.obj
+.\Debug\ColorHeaderCtrl.obj
+.\Debug\ColourPicker.obj
+.\Debug\ColourPopup.obj
+.\Debug\ControlsWnd.obj
+.\Debug\DateComboBox.obj
+.\Debug\DropEdit.obj
+.\Debug\DropListBox.obj
+.\Debug\font.obj
+.\Debug\HighLightButton.obj
+.\Debug\ItemToolTipCtrl.obj
+.\Debug\ModalEdit.obj
+.\Debug\MultiColumnComboBox.obj
+.\Debug\PageListCtrl.obj
+.\Debug\PageListCtrlDesign.obj
+.\Debug\ReflectShellTree.obj
+.\Debug\rttim.obj
+.\Debug\ShellTree.obj
+.\Debug\StdAfx.obj
+.\Debug\XDesignPopupMenu.obj
+.\Debug\XFloorPropertiesWnd.obj
+.\Debug\XFloorPropertiesWndDesign.obj
+.\Debug\xfloorwnd.obj
+.\Debug\XGeneralWndPropPage.obj
+.\Debug\XPropertiesWnd.obj
+.\Debug\XPropertiesWndCtl.obj
+.\Debug\XPropertiesWndPpg.obj
+.\Debug\XPropertiesWnd.res
+]
+Creating command line "link.exe @C:\TEMP\RSP321A.tmp"
+Creating temporary file "C:\TEMP\RSP321B.bat" with contents
+[
+@echo off
+regsvr32 /s /c ".\Debug\XPropertiesWnd.ocx"
+echo regsvr32 exec. time > ".\Debug\regsvr32.trg"
+]
+Creating command line "C:\TEMP\RSP321B.bat"
+Creating Type Library...
+XPropertiesWnd.odl
+oaidl.idl
+objidl.idl
+unknwn.idl
+wtypes.idl
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+ADORMultiColumnComboBox.cpp
+adorrecset.cpp
+AsControls.cpp
+ColorHeaderCtrl.cpp
+ColourPicker.cpp
+ColourPopup.cpp
+ControlsWnd.cpp
+DateComboBox.cpp
+DropEdit.cpp
+DropListBox.cpp
+font.cpp
+HighLightButton.cpp
+ItemToolTipCtrl.cpp
+ModalEdit.cpp
+MultiColumnComboBox.cpp
+PageListCtrl.cpp
+PageListCtrlDesign.cpp
+ReflectShellTree.cpp
+rttim.cpp
+ShellTree.cpp
+Generating Code...
+c:\program files\microsoft visual studio\vc98\mfc\include\afxtempl.h(1210) : warning C4786: 'CMap<HWND__ *,HWND__ *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *>::CMap<HWND__ *,HWND__ *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *>' : identifier was truncated to '255' characters in the debug information
+c:\program files\microsoft visual studio\vc98\mfc\include\afxtempl.h(1273) : warning C4786: 'CMap<HWND__ *,HWND__ *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *>::~CMap<HWND__ *,HWND__ *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *,CMultiColumnComboBox::CWindowProcs::SWindowProcedure *>' : identifier was truncated to '255' characters in the debug information
+c:\program files\microsoft visual studio\vc98\mfc\include\afxtempl.h(1210) : warning C4786: 'CMap<CPageListCtrl *,CPageListCtrl *,CMap<long,long,CControlsWnd *,CControlsWnd *> *,CMap<long,long,CControlsWnd *,CControlsWnd *> *>::CMap<CPageListCtrl *,CPageListCtrl *,CMap<long,long,CControlsWnd *,CControlsWnd *> *,CMap<long,long,CControlsWnd *,CControlsWnd *> *>' : identifier was truncated to '255' characters in the debug information
+c:\program files\microsoft visual studio\vc98\mfc\include\afxtempl.h(1273) : warning C4786: 'CMap<CPageListCtrl *,CPageListCtrl *,CMap<long,long,CControlsWnd *,CControlsWnd *> *,CMap<long,long,CControlsWnd *,CControlsWnd *> *>::~CMap<CPageListCtrl *,CPageListCtrl *,CMap<long,long,CControlsWnd *,CControlsWnd *> *,CMap<long,long,CControlsWnd *,CControlsWnd *> *>' : identifier was truncated to '255' characters in the debug information
+Compiling...
+XDesignPopupMenu.cpp
+XFloorPropertiesWnd.cpp
+XFloorPropertiesWndDesign.cpp
+xfloorwnd.cpp
+XGeneralWndPropPage.cpp
+XPropertiesWnd.cpp
+XPropertiesWndCtl.cpp
+XPropertiesWndPpg.cpp
+Generating Code...
+Linking...
+   Creating library Debug/XPropertiesWnd.lib and object Debug/XPropertiesWnd.exp
+<h3>Output Window</h3>
+Registering ActiveX Control...
+RegSvr32: DllRegisterServer in .\Debug\XPropertiesWnd.ocx succeeded.
+
+
+
+
+<h3>Results</h3>
+XPropertiesWnd.ocx - 0 error(s), 4 warning(s)
+</pre>
+</body>
+</html>

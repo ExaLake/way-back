@@ -1,0 +1,61 @@
+#(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+#          
+#   To anyone who acknowledges that this file is provided "AS IS" 
+#   WITH NO EXPRESS OR IMPLIED WARRANTY:
+#   permission to use, copy, modify, and distribute this file for any 
+#   purpose is hereby granted without fee, provided that the above 
+#   copyright notice and this notice appear in all copies, and that 
+#   the name of Hewlett-Packard Company not be used in advertising or 
+#   publicity pertaining to distribution of the software without 
+#   specific, written prior permission.  Hewlett-Packard Company 
+#   makes no representations about the suitability of this software 
+#   for any purpose.
+
+
+include ../make_defs
+
+CIDL            = /opt/orbplus/bin/cidl
+
+
+CXXFLAGS        =\
+                -Aa +a1 +DA1.0 +Z +p -pth -DNDEBUG\
+                -D_HPUX_SOURCE \
+                $(INCLUDES) -c
+
+LDFLAGS         =\
+                $(CXXFLAGS)
+
+
+all: StoreServer.cc POSServer.cc CentralServer.cc PNSServer.cc \
+     StoreServer.o POSServer.o CentralServer.o PNSServer.o
+
+StoreServer.cc: Store.idl
+	$(CIDL) Store.idl
+
+POSServer.cc: POS.idl
+	$(CIDL) POS.idl
+
+CentralServer.cc: Central.idl
+	$(CIDL) Central.idl
+
+PNSServer.cc: PNS.idl
+	$(CIDL) PNS.idl
+
+StoreServer.o: StoreServer.cc
+	$(LD) StoreTypes.cc StoreServer.cc $(LDFLAGS) $(LD_BINDOPTS) $(TRANSPORTS) $(LIBS)
+
+POSServer.o: POSServer.cc
+	$(LD) POSTypes.cc POSServer.cc $(LDFLAGS) $(LD_BINDOPTS) $(TRANSPORTS) $(LIBS)
+
+CentralServer.o: CentralServer.cc
+	$(LD) CentralTypes.cc CentralServer.cc $(LDFLAGS) $(LD_BINDOPTS) $(TRANSPORTS) $(LIBS)
+
+PNSServer.o: PNSServer.cc
+	$(LD) PNSTypes.cc PNSServer.cc $(LDFLAGS) $(LD_BINDOPTS) $(TRANSPORTS) $(LIBS)
+
+
+
+clean:
+	rm -rf *.cc *.hh *.o core ptrepository
+
+	

@@ -1,0 +1,25 @@
+Point Of Sale Example - NEO Source Tree
+=======================================
+
+
+Building and Running the Example
+--------------------------------
+The code found here follows the description of the POS example
+found in the book. Two simple scripts are also provided:
+	Build.sh: compiles the IDL interfaces and builds each component
+	Launch.sh: launches each component in a separate xterm window
+
+
+Truncated File Names
+--------------------
+Due to the limitations of DOS formatted floppies, most of the files
+found in this source tree have truncated names. However, the file
+neo.tar can be used with Unix tar(1) to restore the source tree with
+full file names.
+
+
+The Latest Information About NEO and JavaNEO
+--------------------------------------------
+This books contains information correct as of August 1995. But you can
+get the latest news about NEO and other products from SunSoft by looking
+at our Web page:  http://www.sun.com/sunsoft/neo

@@ -1,0 +1,32 @@
+include $(PBHOME)/make/make.cfg
+include $(PBHOME)/make/corba/make.cfg
+
+IDLC		  = idlc
+
+POS        = POS 
+STORE      = Store
+CENTRAL    = Central
+PNAME      = PNS
+
+SOURCE.idl = $(POS).idl \
+             $(STORE).idl \
+             $(CENTRAL).idl \
+             $(PNAME).idl
+
+SOURCE.h  = $(SOURCE.idl:.idl=.h)
+
+LIBRARY    = libstubs.a
+
+INCLUDE    = -I. -I$(PBHOME)/include
+CFLAGS     = $(INCLUDE) -c -g
+CCFLAGS		= -g
+IDLC_FLAGS =  $(INCLUDE)
+# ---------------------------------------------------
+
+all debug profile optimize static: $(LIBRARY)
+
+$(LIBRARY): $(OBJECTS)
+	$(CC) -xar -o $(LIBRARY) $(POS)_s.o $(STORE)_s.o $(CENTRAL)_s.o $(PNAME)_s.o $(POS).o $(STORE).o $(CENTRAL).o $(PNAME).o
+
+clean:
+	$(RM) *.o *_s.h *_s.mdf *.C *_s.C *_i.C $(SOURCE.h) $(SOURCE.C) *.model ${LIBRARY} core

@@ -1,0 +1,14 @@
+Due to the overwelming demand for this control, I had to shrink the size of the 
+install files to accommodate bandwidth limitations by our service provider.  Please note
+that a full install for RemoteShell is still available that includes the full Visual Basic 
+runtime for the control.  Please visit http://www.pathguide.com/greg/rsh.htm
+to download this version.
+
+To install, simply unzip the all the files to a folder of your choice and run regocx.bat 
+from the install folder.  The control will then be ready to use in your development
+environment.
+
+Thanks for the support!
+Greg Laycock
+gregl@pathguide.com
+

@@ -1,0 +1,38 @@
+//(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+//          
+//   To anyone who acknowledges that this file is provided "AS IS" 
+//   WITH NO EXPRESS OR IMPLIED WARRANTY:
+//   permission to use, copy, modify, and distribute this file for any 
+//   purpose is hereby granted without fee, provided that the above 
+//   copyright notice and this notice appear in all copies, and that 
+//   the name of Hewlett-Packard Company not be used in advertising or 
+//   publicity pertaining to distribution of the software without 
+//   specific, written prior permission.  Hewlett-Packard Company 
+//   makes no representations about the suitability of this software 
+//   for any purpose.
+
+#ifndef CENTRAL_IDL
+#define CENTRAL_IDL
+// File central.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in the central office of
+// a chain of food stores
+
+// Include interface definition for store and POS objects.
+#include "POS.idl"
+#include "Store.idl"
+
+module CentralOffice {
+
+   interface Depot {
+      void FindItemInfo(
+                       in  AStore::AStoreId StoreId
+                      ,in  POS::Barcode     Item
+                      ,in  long             Quantity
+                      ,out AStore::ItemInfo IInfo)
+         raises (AStore::BarcodeNotFound);
+   };
+};
+
+#endif

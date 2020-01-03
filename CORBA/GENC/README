@@ -1,0 +1,89 @@
+===================================================================
+
+Copyright (C) 1996 by the Object Management Group, Inc.  All  
+rights reserved.  
+
+Permission to use, copy, modify, and distribute this software for
+any  teaching or instructional purpose and without fee is hereby
+granted, provided that the above copyright notice appear in all
+copies and that both that copyright notice and this permission
+notice appear in supporting documentation, and that the names of
+Object Management Group, Inc. (OMG) and John Wiley and Sons, Inc.
+(Wiley) not be used in advertising or publicity pertaining to
+distribution of the software without specific, written prior
+permission.
+
+THIS SOFTWARE IS SOLD AS IS WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+WARRANTY OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.  Neither OMG, Wiley, nor their dealers or distributors
+assume any liability of any alleged or actual damages arising
+from the use of or the inability to use this software.  (Some
+states do not allow the exclusion of implied warranties, so the
+exclusion may not apply to you.)
+
+===================================================================
+
+This directory contains sample code for building the primer POS
+application for a generic C ORB. On the diskette supplied with the book,the filenames are constrained to the MSDOS 8.3 format, in uppercase. The
+mapping of MSDOS names to to the names required by the UNIX build
+system is shown at the end of this README.
+
+You will also need the IDL files, which are in directory IDL off 
+the root directory of this diskette.  
+
+We assume that you will start the application by invoking the executables
+with appropriate arguments from the command line. As stated in the
+book, because of the simplicity of the example the sequencing of
+startup is important. In order to start correctly, the executablers
+should be started in the following order, with a pause between each to
+allow time for initialisation to complete:
+
+	central office
+	output media
+	store
+	pos
+
+The POS will then require user input.
+
+
+MSDOS to UNIX Filename Mapping
+==============================
+
+This mapping shows the UNIX filenames from which the MSDOS equivalents
+have been derived. The supplied UNIX build script assumes the
+filenames are in the original UNIX form rather than the form that
+files have been supplied on the diskette.
+
+The mapping is shown in a form which should be easy to edit to create
+a script to convert the names appropriately once the files have been
+transferred to a UNIX system (prefix each line with "mv "). This has
+not been provided as a ready made script because the mechanism used to
+transfer the files to the UNIX system may well modify the filenames in
+the process and will vary from system to system.
+
+
+MSDOS             UNIX
+-----             ----
+
+README            README            
+CENTRAL.C         central.c         
+COMMON.H          common.h          
+DB.H              db.h              
+DEPOT.DAT         depot.dat         
+DEPOT_MA.C        depot_main.c      
+IM.C              im.c              
+LINEAR.C          linear.c          
+MISC.C            misc.c            
+MISC.H            misc.h            
+OM.C              om.c              
+OM_MAIN.C         om_main.c         
+PNAME_MA.C        pname_main.c      
+PNAMESVC.C        pnamesvc.c        
+POS_MAIN.C        pos_main.c        
+POSTERMI.C        posterminal.c     
+STORE.C           store.c           
+STORE_AC.C        store_access.c    
+STORE_MA.C        store_main.c      
+TAX.C             tax.c             
+

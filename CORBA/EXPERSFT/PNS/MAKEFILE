@@ -1,0 +1,18 @@
+SOURCE.C   = PNS_i.C \
+             PNSData.C \
+             Srv_Main.C
+APPL = PNSServer
+INCLUDE = -I. -I../IDL -I$(PBHOME)/include
+LIBRARY =  -L../IDL -L$(PBHOME)/lib -lstubs -lunixsvc -lcorba -lpbroker
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = 
+
+include $(PBHOME)/make/make.cfg
+include $(PBHOME)/make/corba/make.cfg
+
+all $(APPL): $(OBJECTS)
+	$(CC) -g -o $(APPL) $(OBJECTS) $(OTHEROBJS) $(LIBRARY) -lsocket -lnsl
+
+clean:
+	rm -f *.o ${DEPFILE} ${APPL} .make.state .nse_depinfo core
+

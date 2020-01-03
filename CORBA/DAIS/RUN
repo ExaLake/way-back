@@ -1,0 +1,55 @@
+for ii in $*
+do
+
+	case $ii in
+		c)  echo central
+			xterm -geometry 80x10+0+600 -e central &
+			sleep 3
+			;;
+		om) echo om
+			xterm -geometry 80x10+0+800 -e om id=123 &
+			sleep 4
+			;;
+		om2) echo om2
+			xterm -geometry 80x10+200+800 -e om id=456 &
+			sleep 4
+			;;
+		s)  echo store
+			xterm -geometry 80x10+0+400 -e store markup=0.25 id=99 &
+			sleep 2
+			;;
+		p)  sleep 2
+			echo pos
+			pos id=123 store=99
+			;;
+		p2) sleep 2
+			echo pos2
+			pos id=456 store=99
+			;;
+		*) echo "usage: run [c] [om[2]] [s] [p[2]]"
+			echo ""
+			echo "This script is provided as an example of how to run up the"
+			echo "application. It is not necessary to use this as the executables can"
+			echo "just be run up from the command line. It is provided as a convenience."
+			echo ""
+			echo "The arguments allow a combination of the executables to be run up in"
+			echo "the given order, appropriate pauses being placed between starting each"
+			echo "executable to allow the previous to complete its initialisation. The"
+			echo "arguments are as follows:"
+			echo ""
+			echo "c   -   central office"
+			echo "om  -   an output media object "
+			echo "om2 -   an alternative output media object"
+			echo "s   -   a store object"
+			echo "p   -   a pos terminal object (which matches om)"
+			echo "p2  -   an alternative pos terminal object (which matches om2)"
+			echo ""
+			echo "An example to start up the application would be:"
+			echo ""
+			echo "run c om s p"
+			echo ""
+			;;
+	esac
+done
+
+

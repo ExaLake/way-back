@@ -1,0 +1,71 @@
+/********************************************************
+ FILE: neo/interfaces/central.idl
+
+ DISCLAIMER: This code associated with this publication is intended to
+ server solely as a programming example.  While this code is believed
+ to be accurate, none of the Copyright holders makes any warranty of
+ any kind for this code including but not limited to the implied
+ warranties of merchantability and fitness for a particular purpose.
+ None of the Copyright holders shall be liable for errors contained
+ herein, or for incidental or consequential damages in connection with
+ the furnishing, performance or use of this material at any time.
+
+ Copyright 1995 by
+  Object Management Group
+  IONA Technologies, Ltd.
+  Expersoft Inc.
+  SunSoft, Inc.
+  IBM Inc.
+  Hewlett-Packard Company, Inc.
+  International Computers Ltd.
+  Digital Equipment Corporation
+ All rights are reserved under the applicable copyright laws.
+
+********************************************************/
+#ifndef CENTRAL_IDL
+#define CENTRAL_IDL
+// File central.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in the central office of
+// a chain of food stores
+//
+// Author:
+// Hal Mirsky 5-14-95
+//
+// Modification History
+//
+// Date             By          Notes
+// 5-22-95          H Mirsky    remove Initialize() method
+// 5-25-95          S Baker     added ItemInfo
+// 5-25-95          S Baker     changed FindItem()
+// 5-27-95          H Mirsky    use naming conventions for identifiers
+// 5-28-95          D Frantz    changed find_item_info to return ItemInfo
+//                                 as out par rather than return value
+// 6-14-95          D Frantz    added quantity to ItemInfo for simplicity
+//                                 of server & database code
+//                              move ItemInfo struct to Store for
+//                                 simplicity
+// 6-15-95          D Frantz    modify ItemInfo type in parameter list to
+//                                 AStore::ItemInfo
+// 7-7-95           H Mirsky    move ItemTypes, AStoreId, ItemInfo from AStore
+//                              to avoid circular includes
+// 7-13-95          H Mirsky    move types back to store.idl
+
+// Include interface definition for store and POS objects.
+#include "pos.idl"
+#include "store.idl"
+
+module CentralOffice {
+
+   interface Depot {
+      void find_item_info(
+                       in  AStore::AStoreId store_id
+                      ,in  POS::Barcode     item
+                      ,in  long             quantity
+                      ,out AStore::ItemInfo item_info)
+         raises ( AStore::BarcodeNotFound);
+   };
+};
+
+#endif

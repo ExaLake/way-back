@@ -1,0 +1,17 @@
+SOURCE.C   = Depot_i.C \
+             DepotData.C \
+             Srv_Main.C
+
+APPL = CentralServer
+INCLUDE = -I. -I../IDL -I../POS -I../store -I../util
+LIBRARY =  -L../IDL -lidl
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = ../util/FindPNS.o
+
+include ../make.cfg
+
+all $(APPL): $(OBJECTS)
+	$(CC) -g -o $(APPL) $(OBJECTS) $(OTHEROBJS) $(LIBRARY)
+
+clean:
+	rm -f *.o core $(APPL) .nse_depinfo .make.state

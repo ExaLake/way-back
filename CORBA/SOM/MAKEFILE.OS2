@@ -1,0 +1,105 @@
+ #
+ #   (C) COPYRIGHT International Business Machines Corp. 1995
+ #   All Rights Reserved
+ #   Licensed Materials - Property of IBM
+ #   US Government Users Restricted Rights - Use, duplication or
+ #   disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ #
+ #   DISCLAIMER OF WARRANTIES.
+ #   The following [enclosed] code is sample code created by IBM
+ #   Corporation. This sample code is not part of any standard or IBM
+ #   product and is provided to you solely for the purpose of assisting
+ #   you in the development of your applications.  The code is provided
+ #   "AS IS". IBM MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT
+ #   NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ #   FOR A PARTICULAR PURPOSE, REGARDING THE FUNCTION OR PERFORMANCE OF
+ #   THIS CODE.  IBM shall not be liable for any damages arising out of
+ #   your use of the sample code, even if they have been advised of the
+ #   possibility of such damages.
+ #
+ #   DISTRIBUTION.
+ #   This sample code can be freely distributed, copied, altered, and
+ #   incorporated into other software, provided that it bears the above
+ #   Copyright notice and DISCLAIMER intact.
+ #
+
+ #
+ # This is the makefile for building the Point of Sale example
+ # on IBM's OS/2 operating system.
+ #
+
+CC      = icc
+CFLAGS  = -D_OS2 -W3 -c -Ti+ -Q+ -Ss+ -Gd- -Gm+ -Gs+ -Sm
+LINKER  = link386
+LFLAGS  = /exepack /packd /packc /align:4 /stack:360000 /pm:vio /noi /nol /co
+OBJS    =  central.obj db.obj initmod.obj pos.obj store.obj  util.obj pnamesvc.obj posClnt.obj
+HEADERS =  pos.h pos.ih store.h store.ih central.h central.ih pnamesvc.ih pnamesvc.h
+LIBLIST = somtk+dde4mbs+os2386
+IDLFILES= pos.idl central.idl store.idl pnamesvc.idl
+INCLUDEPATH= -I. -I$(SOMBASE)/include
+LIBPTH = $(LIBDIRPATH) -L$(SOMBASE)/lib -L.
+LINKER = link386
+
+all: 	$(HEADERS) $(OBJS) dobjs.dll dobjs.lib \
+        posClnt.exe somdimpl somir
+
+
+
+clean:  cleanimpl
+	-del $(OBJS)
+	-del $(HEADERS)
+	-del posClnt.exe dobjs.dll dobjs.lib pname.ref
+
+cleanimpl:
+        -regimpl -D -i centralsvr
+        -regimpl -D -i pnssvr
+        -regimpl -D -i storesvr_1
+        -regimpl -D -i outputsvr_1
+        -regimpl -D -i outputsvr_2
+        -del -f somdimpl
+	-del -f somir
+
+
+.SUFFIXES: .obj .c .ih .idl .h .def
+
+.c.obj:
+	$(CC) $(CFLAGS) $(INCLUDEPATH) -Ge- $<
+
+.idl.ih:
+	sc -sh;ih $<
+
+.idl.h:
+	sc -sh;ih $<
+
+somir:
+	sc -sir -u $(IDLFILES)
+	echo "" > somir
+
+### -- Build the "import library" for the DLL.
+dobjs.lib: dobjs.dll
+	implib dobjs.lib dobjs.def
+
+### -- Build the DLL.
+dobjs.dll: $(OBJS) dobjs.def
+	$(LINKER) @dobjs.lnk
+
+### -- Build the executables.
+posClnt.obj: $(INCLS) posClnt.c
+	$(CC) $(CFLAGS) -I. -I$(SOMBASE)/include -Ge+ posClnt.c
+
+posClnt.exe: dobjs.lib posClnt.obj
+	$(LINKER) $(LFLAGS) posClnt.obj,$@,NUL,$(LIBLIST)+dobjs.lib;
+
+
+
+### -- Build the DSOM Implementation Repository.
+somdimpl:
+	-regimpl -A -i centralsvr    -v ::CentralOffice::Depot
+	-regimpl -A -i pnssvr        -v PseudoNameService
+	-regimpl -A -i storesvr_1    -v ::AStore::Store
+	-regimpl -A -i outputsvr_1   -v ::POS::OutputMedia
+	-regimpl -A -i outputsvr_2   -v ::POS::OutputMedia
+	-regimpl -L -i centralsvr -i pnssvr -i storesvr_1 -i outputsvr_1 \
+		-i outputsvr_2
+	echo "" > somdimpl
+

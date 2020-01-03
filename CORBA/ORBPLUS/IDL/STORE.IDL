@@ -1,0 +1,105 @@
+//(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+//          
+//   To anyone who acknowledges that this file is provided "AS IS" 
+//   WITH NO EXPRESS OR IMPLIED WARRANTY:
+//   permission to use, copy, modify, and distribute this file for any 
+//   purpose is hereby granted without fee, provided that the above 
+//   copyright notice and this notice appear in all copies, and that 
+//   the name of Hewlett-Packard Company not be used in advertising or 
+//   publicity pertaining to distribution of the software without 
+//   specific, written prior permission.  Hewlett-Packard Company 
+//   makes no representations about the suitability of this software 
+//   for any purpose.
+
+#ifndef STORE_IDL
+#define STORE_IDL
+
+// File store.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in a chain food store
+// Point of Sale (POS) System.
+//
+
+
+// include interface definition for Point Of Sale objects
+#include "POS.idl"
+
+module AStore {
+
+   enum ItemTypes {food, clothes, other};
+   typedef long AStoreId;
+
+   struct ItemInfo {
+      POS::Barcode      Item;
+      ItemTypes         Itemtype;
+      float             Itemcost;
+      string            Name;
+      long              Quantity;
+   };
+
+   // The barcodeNotFound exception indicates that the
+   // input barcode does not match to any known item.
+   exception BarcodeNotFound { POS::Barcode item; };
+
+   interface StoreAccess; // /forward reference
+
+   struct POSInfo {
+        POS::POSId   Id;
+        StoreAccess  StoreAccessReference;
+        float        TotalSales;
+        float        TotalTaxes;
+   };
+
+   typedef sequence <POSInfo> POSList;
+
+   interface Tax {
+
+      float CalculateTax(in float           TaxableAmount);
+
+      float FindTaxablePrice(in float       ItemPrice
+                            ,in ItemTypes   ItemType);
+
+   };
+
+   interface Store {
+
+        struct StoreTotals {
+           float     StoreTotal;
+           float     StoreTaxTotal;
+        };
+
+        readonly attribute AStoreId StoreId;
+
+        // The struct StoreTotals and this readonly attribute are used
+        // in place of a pair of float attributes to avoid data inconsistencies
+        // that would result from the following sequence of operations:
+        //
+        //    POS 1 invokes a method to read StoreTotal
+        //    POS 2 invokes the method UpdateStoreTotals
+        //    POS 1 invoikes a method to read the StoreTaxTotal
+        readonly attribute StoreTotals Totals;
+
+        StoreAccess Login(in POS::POSId Id);
+        void      GetPOSTotals(out POSList POSData);
+        void      UpdateStoreTotals(
+                      in POS::POSId Id
+                     ,in float      Price
+                     ,in float      Taxes);
+   };
+
+   interface StoreAccess {
+
+      // itemtaxprice is 0 or return value of FindTaxablePrice()
+      void      FindPrice(
+                      in  POS::Barcode Item
+                     ,in  long         Quantity
+                     ,out float        ItemPrice
+                     ,out float        ItemTaxPrice
+                     ,out ItemInfo     IInfo)
+         raises (BarcodeNotFound);
+
+   };
+
+};
+#endif

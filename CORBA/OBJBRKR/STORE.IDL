@@ -1,0 +1,107 @@
+#ifndef STORE_IDL
+#define STORE_IDL
+
+// File store.idl
+//
+// Purpose:
+// IDL definition of interfaces for objects in a chain food store
+// Point of Sale (POS) System.
+//
+
+// include interface definition for Point Of Sale objects
+#include "POS.idl"
+
+module AStore {
+
+   enum ItemTypes {food, clothes, other};
+   typedef long AStoreId;
+
+   struct ItemInfo {
+      POS::Barcode      Item;
+      ItemTypes         Itemtype;
+      float             Itemcost;
+      string            Name;
+      long              Quantity;
+   };
+
+   // The barcodeNotFound exception indicates that the
+   // input barcode does not match to any known item.
+   exception BarcodeNotFound { POS::Barcode item; };
+
+   interface StoreAccess {
+
+      // itemtaxprice is 0 or return value of FindTaxablePrice()
+      void      FindPrice(
+                      in  POS::Barcode Item
+                     ,in  long         Quantity
+                     ,out float        ItemPrice
+                     ,out float        ItemTaxPrice
+                     ,out ItemInfo     IInfo)
+         raises (BarcodeNotFound);
+
+   };
+
+   struct POSInfo {
+        POS::POSId   Id;
+        StoreAccess  StoreAccessReference;
+        float        TotalSales;
+        float        TotalTaxes;
+   };
+
+   typedef sequence <POSInfo> POSList;
+
+   interface Tax {
+
+      float CalculateTax(in float           TaxableAmount);
+
+      float FindTaxablePrice(in float       ItemPrice
+                            ,in ItemTypes   ItemType);
+
+   };
+
+   interface Store {
+
+        struct StoreTotals {
+           float     StoreTotal;
+           float     StoreTaxTotal;
+        };
+
+        readonly attribute AStoreId StoreId;
+
+        // The struct StoreTotals and this readonly attribute are used
+        // in place of a pair of float attributes to avoid data inconsistencies
+        // that would result from the following sequence of operations:
+        //
+        //    POS 1 invokes a method to read StoreTotal
+        //    POS 2 invokes the method UpdateStoreTotals
+        //    POS 1 invoikes a method to read the StoreTaxTotal
+        readonly attribute StoreTotals Totals;
+
+        StoreAccess Login(in POS::POSId Id);
+        void      GetPOSTotals(out POSList POSData);
+        void      UpdateStoreTotals(
+                      in POS::POSId Id
+                     ,in float      Price
+                     ,in float      Taxes);
+   };
+
+};
+#endif
+#pragma repository_id( "AStore::ItemTypes", "7049337f8c3e.0c.c1.09.00.00.00.00.00")
+#pragma repository_id( "AStore::AStoreId", "7049337f8c3f.0c.c1.09.00.00.00.00.00")
+#pragma repository_id( "AStore::ItemInfo", "7049337f8c40.0c.c1.09.00.00.00.00.00")
+#pragma repository_id( "AStore::BarcodeNotFound", "7049337f8c41.0c.c1.09.00.00.00.00.00")
+#pragma interface_id( "AStore::StoreAccess", "7049337f8c42.0c.c1.09.00.00.00.00.00")
+#pragma operation_id( "AStore::StoreAccess::FindPrice", "7049337f8c43.0c.c1.09.00.00.00.00.00", 1)
+#pragma repository_id( "AStore::POSInfo", "7049337f8c44.0c.c1.09.00.00.00.00.00")
+#pragma repository_id( "AStore::POSList", "7049337f8c45.0c.c1.09.00.00.00.00.00")
+#pragma interface_id( "AStore::Tax", "7049337f8c46.0c.c1.09.00.00.00.00.00")
+#pragma operation_id( "AStore::Tax::CalculateTax", "7049337f8c47.0c.c1.09.00.00.00.00.00", 1)
+#pragma operation_id( "AStore::Tax::FindTaxablePrice", "7049337f8c48.0c.c1.09.00.00.00.00.00", 2)
+#pragma interface_id( "AStore::Store", "7049337f8c49.0c.c1.09.00.00.00.00.00")
+#pragma repository_id( "AStore::Store::StoreTotals", "7049337f8c4a.0c.c1.09.00.00.00.00.00")
+#pragma attribute_id( "AStore::Store::StoreId", "7049337f8c4b.0c.c1.09.00.00.00.00.00", 1, "7049337f8c4c.0c.c1.09.00.00.00.00.00", 2)
+#pragma attribute_id( "AStore::Store::Totals", "7049337f8c4d.0c.c1.09.00.00.00.00.00", 3, "7049337f8c4e.0c.c1.09.00.00.00.00.00", 4)
+#pragma operation_id( "AStore::Store::Login", "7049337f8c4f.0c.c1.09.00.00.00.00.00", 5)
+#pragma operation_id( "AStore::Store::GetPOSTotals", "7049337f8c50.0c.c1.09.00.00.00.00.00", 6)
+#pragma operation_id( "AStore::Store::UpdateStoreTotals", "7049337f8c51.0c.c1.09.00.00.00.00.00", 7)

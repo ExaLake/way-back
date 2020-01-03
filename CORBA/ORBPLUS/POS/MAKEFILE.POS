@@ -1,0 +1,33 @@
+#(c) Copyright 1996 HEWLETT-PACKARD COMPANY
+#          
+#   To anyone who acknowledges that this file is provided "AS IS" 
+#   WITH NO EXPRESS OR IMPLIED WARRANTY:
+#   permission to use, copy, modify, and distribute this file for any 
+#   purpose is hereby granted without fee, provided that the above 
+#   copyright notice and this notice appear in all copies, and that 
+#   the name of Hewlett-Packard Company not be used in advertising or 
+#   publicity pertaining to distribution of the software without 
+#   specific, written prior permission.  Hewlett-Packard Company 
+#   makes no representations about the suitability of this software 
+#   for any purpose.
+
+
+include ../make_defs
+
+
+SFFILES			= Srv_Main.o  POS_OM.o
+CFFILES                 = POSClt.o POS_IM.o POS_Ter.o
+
+
+all: Srv_Main POSClt
+
+Srv_Main:   $(SFFILES)
+	$(LD) -o Srv_Main $(LDFLAGS) $(LD_BINDOPTS) $(IFFILES) $(SFFILES) $(TRANSPORTS) $(LIBS)
+
+POSClt:   $(CFFILES)
+	$(LD) -o POSClt $(LDFLAGS) $(LD_BINDOPTS) $(IFFILES) $(CFFILES) $(TRANSPORTS) $(LIBS)
+
+clean:	
+	rm -rf *.o Srv_Main POSClt core ptrepository
+
+	

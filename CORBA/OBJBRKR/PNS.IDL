@@ -1,0 +1,28 @@
+#ifndef PNAMESVC_IDL
+#define PNAMESVC_IDL
+
+// File pnamesvc.idl
+//
+// Purpose:
+// IDL definition of interface for a name service for the point of sale system.
+// This object supports operation of the POS, store, and CentralOffice by providing
+// a 'convenient' (and well known) place for resolving object names.
+// An instance of PsedoNameService will be brought up before any application objects.
+//
+// Each application object that wishes to 'publish' its identity invokes
+// the operation BindName.  Clients are then able to invoke 'ResolveName' to obtain a
+// reference to the subject object.
+//
+
+interface PseudoNameService
+{
+   void   BindName(in string ObjectName
+                  ,in Object ObjectRef);
+
+   Object ResolveName(in string ObjectName);
+};
+
+#endif
+#pragma interface_id( "PseudoNameService", "7049337f97f9.0c.c1.09.00.00.00.00.00")
+#pragma operation_id( "PseudoNameService::BindName", "7049337f97fa.0c.c1.09.00.00.00.00.00", 1)
+#pragma operation_id( "PseudoNameService::ResolveName", "7049337f97fb.0c.c1.09.00.00.00.00.00", 2)

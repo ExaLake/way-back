@@ -1,0 +1,33 @@
+LIBRARY dobjs INITINSTANCE TERMINSTANCE
+DESCRIPTION 'CORBA Programming Primer Example'
+PROTMODE
+DATA MULTIPLE NONSHARED LOADONCALL
+EXPORTS
+  CentralOffice_DepotCClassData 
+  CentralOffice_DepotClassData 
+  CentralOffice_DepotNewClass 
+  PseudoNameServiceCClassData 
+  PseudoNameServiceClassData 
+  PseudoNameServiceNewClass 
+  POS_InputMediaCClassData
+  POS_InputMediaClassData
+  POS_InputMediaNewClass
+  POS_OutputMediaCClassData
+  POS_OutputMediaClassData
+  POS_OutputMediaNewClass
+  POS_POSTerminalCClassData 
+  POS_POSTerminalClassData 
+  POS_POSTerminalNewClass 
+  AStore_StoreAccessCClassData 
+  AStore_StoreAccessClassData 
+  AStore_StoreAccessNewClass
+  AStore_TaxCClassData 
+  AStore_TaxClassData 
+  AStore_TaxNewClass 
+  AStore_StoreCClassData
+  AStore_StoreClassData
+  AStore_StoreNewClass 
+  application_terminate
+  handle_exception
+  storeid
+  posid

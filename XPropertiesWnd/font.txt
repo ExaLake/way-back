@@ -1,0 +1,108 @@
+xPropertiesWnd - Font picker, update version.
+
+ xPropertiesWnd ActiveX Control has now a new feature: font property. You can set one or more properties to be font property, either in design mode by chosing Font item from subfolder Type, or at runtime with:
+  InsertProperty function, pass as type the string _T("Font"). Too, the font property has a color for , color font. This type is
+  in fact a buttom, witch open a CFontDialog, for chosing a system font and a color for this.
+  To set a default value, you can call SetValue function. As last parameter, function requires
+  a variant member. If this variant is numeric type, like integer, long, the SetValue will set
+  the color for font property. If the variant type is a font interface (property Font in VB,
+  or IFont* in VC) the function SetValue will set the new font for one font property. 
+  If you want to retrieve value of a font property , you have to call GetValue function with
+  last parameter 0.(nColumn = 0). This will return a IFont*. If you want to retrieve the colour just call the same function
+  with last parameter 1. (nColumn = 1). In that case, the function will return a unsigned long, witch represents the colour of 
+  font property. 
+  VB sample code.
+   xProp.SetValue(0,0, Me.Font, 0), where xProp is a XPropertiesWnd ActiveX Control,
+   In first page (0), at first item you have a font property. This function will set as default
+   value font property to be the form font.
+   xProp.SetValue(0,0,255,0), will set the color of font to be red.
+
+  VC++ sample code:
+   In C++ you need two functions (CreateOleFont, CreateFontDisp) for conversion IFont* throw CFont* and reverse.
+   
+   Using SetValue for a font property into VC++
+ 
+   VARIANT v;
+   v.vt = VT_DISPATCH;
+   v.pdispVal = CreateOleFont(pFont) // see below
+   xProp.SetValue(0,0,v,0)
+  
+   , where pFont is a pointer to a CFont. With this snnipet, you choose for the first 
+   font property (0,0), font pFont 
+
+   Using GetValue for a font property into VC++
+
+	static CFont font;
+	font.DeleteObject();
+	VERIFY(CreateFontDisp(xProp.GetValue(0,0,0).pdispVal, font)); // see below
+	, in font you will have a copy of selected font from (0,0) property.
+
+ Another changes into controls:
+  SetValue - for color picker: this function will set the new selected color, if the variant paramember is 
+  one of numeric type, else this function will work like SetDefaultValue.
+  GetValue - the same.
+
+
+#include <atlconv.h>
+// Function name	: CreateOleFont
+// Description	    : Create a IFontDisp interface for font pFont. 
+// Return type		: IDispatch* 
+// Argument         : CFont* pFont
+IDispatch* CreateOleFont(CFont* pFont)
+{
+	IDispatch* pDispatch = NULL;
+	USES_CONVERSION;
+	if (pFont)
+	{
+		LOGFONT logfont;
+		if (pFont->GetLogFont(&logfont))
+		{
+			LOGFONT* pLogFont = &logfont;
+			FONTDESC fd;
+			fd.cbSizeofstruct = sizeof(FONTDESC);
+			fd.lpstrName = T2OLE(pLogFont->lfFaceName);
+			fd.sWeight = (short)pLogFont->lfWeight;
+			fd.sCharset = pLogFont->lfCharSet;
+			fd.fItalic = pLogFont->lfItalic;
+			fd.fUnderline = pLogFont->lfUnderline;
+			fd.fStrikethrough = pLogFont->lfStrikeOut;
+
+			long lfHeight = pLogFont->lfHeight;
+			if (lfHeight < 0)
+				lfHeight = -lfHeight;
+
+			fd.cySize.Lo = lfHeight * 720000 / 96;
+			fd.cySize.Hi = 0;
+
+			if (FAILED(::OleCreateFontIndirect(&fd, IID_IFontDisp, (void**)&pDispatch)))
+				pDispatch = NULL;
+		}
+	}
+	return pDispatch;
+}
+
+// Function name	: CreateFontDisp
+// Description	    : Create a font from a IFont interface
+// Return type		: BOOL 
+// Argument         : IDispatch* pDispatchFont
+// Argument         : CFont& font
+BOOL CreateFontDisp(IDispatch* pDispatchFont, CFont& font)
+{
+	HFONT hFont = NULL;
+	TRY
+	{
+		IFont* pIFont = (IFont*)pDispatchFont;
+		if (!FAILED(pIFont->get_hFont(&hFont)))
+		{
+			LOGFONT logFont;
+			CFont::FromHandle(hFont)->GetLogFont(&logFont);
+			return font.CreateFontIndirect(&logFont);
+		}
+	}
+	CATCH_ALL(e)
+	{
+		e->Delete();
+	}
+	END_CATCH_ALL;
+	return FALSE;
+}

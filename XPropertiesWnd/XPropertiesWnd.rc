@@ -1,0 +1,320 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""XPropertiesWnd.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Filimon\0"
+            VALUE "FileDescription", "XPropertiesWnd ActiveX Control Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "XPROPERTIESWND\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "XPROPERTIESWND.OCX\0"
+            VALUE "ProductName", "XPropertiesWnd ActiveX Control Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "OLESelfRegister", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ABOUTDLL            ICON    DISCARDABLE     "XPropertiesWnd.ico"
+IDI_ICON_DOWN           ICON    DISCARDABLE     "icon_dow.ico"
+IDI_ICON_UP             ICON    DISCARDABLE     "icon_up.ico"
+IDI_ICON_DOTS           ICON    DISCARDABLE     "icon_dot.ico"
+IDI_ICON_CLICK          ICON    DISCARDABLE     "icon_clk.ico"
+IDI_ICON_RETURN         ICON    DISCARDABLE     "icon1.ico"
+IDI_ICON_LINK           ICON    DISCARDABLE     "icon_ret.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_XPROPERTIESWND      BITMAP  DISCARDABLE     "XPropertiesWndCtl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX_XPROPERTIESWND DIALOG DISCARDABLE  34, 22, 260, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About XPropertiesWnd Control"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_ABOUTDLL,IDC_STATIC,10,10,20,20
+    LTEXT           "XPropertiesWnd Control, Version 1.0",IDC_STATIC,40,10,
+                    170,8
+    LTEXT           "Copyright (C) 1998, Mihai Filimon",IDC_STATIC,40,25,170,
+                    8
+    DEFPUSHBUTTON   "OK",IDOK,221,7,32,14,WS_GROUP
+END
+
+IDD_PROPPAGE_XPROPERTIESWND_PREVIEW DIALOG DISCARDABLE  0, 0, 250, 110
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_XFLOORWNDCTRL_PAGES,
+                    "{24FFD1ED-5EA9-11D2-86B1-0040055C08D9}",WS_TABSTOP,7,12,
+                    205,90
+    GROUPBOX        "Pages",IDC_STATIC,2,2,245,105
+    CONTROL         "Slider1",IDC_SLIDER_ADDDEL,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_TOP | WS_TABSTOP,217,12,
+                    24,90
+END
+
+IDD_PROPPAGE_XPROPERTIESWND_GENERAL DIALOG DISCARDABLE  0, 0, 250, 110
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "ToolTips",IDC_CHECK_TOOLTIP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,5,45,15
+    CONTROL         "First page has caption",IDC_CHECK_FIRSTPAGECAPTION,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,20,85,15
+    CONTROL         "Looks as floor...",IDC_CHECK_ASFLOOR,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,36,85,15
+    CONTROL         "Resize first column",IDC_CHECK_RESIZEFIRST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,52,85,15
+    CONTROL         "Animation",IDC_CHECK_ANIMATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,67,85,15
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX_XPROPERTIESWND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 253
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_PROPPAGE_XPROPERTIESWND_PREVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_PROPPAGE_XPROPERTIESWND_GENERAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 98
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PROPPAGE_XPROPERTIESWND_PREVIEW DLGINIT
+BEGIN
+    IDC_XFLOORWNDCTRL_PAGES, 0x376, 66, 0
+0x0000, 0x0000, 0x0000, 0x0001, 0x1fd5, 0x0000, 0x0f17, 0x0000, 0x0005, 
+0x0000, 0x8080, 0x0080, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 
+0x00aa, 0xb84b, 0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0600, 0x6154, 
+0x6f68, 0x616d, 0x0001, 0x0000, 0x0100, 0x0001, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "MListCtrlDesign"
+    BEGIN
+        MENUITEM "Insert",                      ID_MENU_INSERT
+        MENUITEM "Edit",                        ID_MENU_EDIT
+        MENUITEM "Delete",                      ID_MENU_DELETE
+        POPUP "As"
+        BEGIN
+            MENUITEM "Edit",                        ID_MENUAS_EDIT
+            MENUITEM "Button",                      ID_MENUAS_BUTTON
+            MENUITEM "Link",                        ID_MENUAS_LINK
+            MENUITEM "Return",                      ID_MENUAS_RETURN
+            MENUITEM "Font",                        ID_MENUAS_FONT
+            MENUITEM SEPARATOR
+            MENUITEM "BoolComboBox",                ID_MENUAS_BOOLCOMBOBOX
+            MENUITEM "ADORComboBox",                ID_MENUAS_ADORCOMBOBOX
+            MENUITEM "DataComboBox",                ID_MENUAS_DATACOMBOBOX
+            MENUITEM "ComboBox",                    ID_MENUAS_COMBOBOX
+            MENUITEM SEPARATOR
+            MENUITEM "UserComboBox",                ID_MENUAS_USERCOMBOBOX
+            , GRAYED
+            MENUITEM "ShellFolder",                 ID_MENUAS_SHELLFOLDER
+            MENUITEM "ColorComboBox",               ID_MENUAS_COLORCOMBOBOX
+        END
+        MENUITEM SEPARATOR
+        POPUP "Type"
+        BEGIN
+            MENUITEM "Enable",                      ID_MENUTYPE_ENABLE
+            MENUITEM "Disable (Grayed)",            ID_MENUTYPE_DISABLE
+            MENUITEM "Read Only",                   ID_MENUTYPE_DISABLEBLACK
+        END
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_XPROPERTIESWND      "XPropertiesWnd Control"
+    IDS_XPROPERTIESWND_PREVIEW_PPG "Preview XPropertiesWnd Property Page"
+    IDS_XPROPERTIESWND_GENERAL_PPG "General XPropertiesWnd Property Page"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_XPROPERTIESWND_PPG_PREVIEW_CAPTION "Preview"
+    IDS_XPROPERTIESWND_PPG_GENERAL_CAPTION "Options"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MENU_INSERT          "Insert a new line into listcontrol."
+    ID_MENU_DELETE          "Delete selected line."
+    ID_MENUAS_EDIT          "Set the item as edit control."
+    ID_MENUAS_COMBOBOX      "Set the item as combo control."
+    ID_MENUAS_BOOLCOMBOBOX  "Set the item as boolean combo control."
+    ID_MENUAS_BUTTON        "Set the item as button control."
+    ID_MENUAS_USERCOMBOBOX  "Set the item as user combo control."
+    ID_MENU_ENABLE          "Enable items."
+    ID_MENU_DISABLE         "Disable items"
+    ID_MENUTYPE_DISABLE     "Set item disable as gray."
+    ID_MENUTYPE_DISABLEBLACK "Set Item disable as black"
+    ID_MENUAS_COLORCOMBOBOX "Set the property to be a color picker"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING_TOOLTIP      " "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MENUAS_SHELLFOLDER   "Set the property to be a shell folder"
+    ID_MENUAS_ADORCOMBOBOX  "Link this property with a ADOR recordset"
+    ID_MENUAS_DATA          "Set the item as data"
+    ID_MENUAS_DATACOMBOBOX  "Set the item as data picker."
+    ID_MENUAS_RETURN        "Set the item as return button control."
+    ID_MENUAS_LINK          "Set the item as link button control."
+    ID_MENUAS_FONT          "Set the item as font control."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "XPropertiesWnd.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

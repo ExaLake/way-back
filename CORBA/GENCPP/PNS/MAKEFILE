@@ -1,0 +1,17 @@
+SOURCE.C   = PNS_i.C \
+             PNSData.C \
+             Srv_Main.C
+APPL = PNSServer
+INCLUDE = -I. -I../IDL 
+LIBRARY =  -L../IDL -lidl
+CFLAGS = -g -c $(INCLUDE)
+OTHEROBJS = 
+
+include ../make.cfg
+
+all $(APPL): $(OBJECTS)
+	$(CC) -g -o $(APPL) $(OBJECTS) $(OTHEROBJS) $(LIBRARY)
+
+clean:
+	rm -f *.o ${DEPFILE} ${APPL} .make.state .nse_depinfo core
+

@@ -1,0 +1,21 @@
+#include ../make.cfg
+
+SOURCE.idl = POS.idl \
+             Store.idl \
+             Central.idl \
+             PNS.idl
+
+LIBRARY    = libidl.a
+
+INCLUDE    = -I.
+CFLAGS     = $(INCLUDE) -c -g
+CCFLAGS    = 
+# ---------------------------------------------------
+
+all debug profile optimize static: $(LIBRARY)
+
+$(LIBRARY): $(OBJECTS)
+	$(CC) -xar -o $(LIBRARY) $(OBJECTS)
+
+clean:
+	$(RM) *.o ${LIBRARY} core
